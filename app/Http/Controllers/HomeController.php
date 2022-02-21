@@ -26,6 +26,6 @@ class HomeController extends Controller
         return view('home');
     }
     public function dashboard(){
-        echo "Loguei";
+        return view('dashboard');
     }
 }

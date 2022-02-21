@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import routes from './routes';
-import Login from './view/Login.vue';
+import routes from './dash';
 
 
 
@@ -16,8 +15,9 @@ Vue.config.productionTip = false
 
 Vue.use(Router);
 
+
+
 let app = new Vue({
     el: '#app',
-    components:{ Login },
     router: new Router(routes)
 })
