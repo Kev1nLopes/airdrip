@@ -47,6 +47,6 @@
         <p>Todos direitos reservados... <br> menos o seu</p>
       </footer>
   </div>    
-<script src="/js/app.js"></script>
+
 </body>
 </html>
