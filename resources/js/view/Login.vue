@@ -1,8 +1,9 @@
 <template>
   <section id="login" class="is-flex container is-justify-content-center is-align-items-center ">
     <div class="content has-text-centered is-flex is-flex-direction-column is-justify-content-space-evenly">
-       <h3>AirDrip</h3>
+      <h3>AirDrip</h3>
       <form method="POST" class="is-flex is-flex-direction-column has-text-left ">
+      <input type="hidden" name="_token" :value="csrf_token">
       <label for="email">E-mail:</label>
       <input type="email" name="email" id="email" autocomplete="off" placeholder="Informe seu e-mail" v-model="form.email" />
       <label for="password">Password:</label>
@@ -16,24 +17,19 @@
 <script>
 export default {
   name: 'Login',
+  props: ['csrf_token'],
   data(){
     return{
       form:{
         email: '',
         password: ''
-      },
-      errors: []
+      }
     }
   },
   methods:{
-    login(){
-      axios.post('/login', this.form).then(()=>{
-        
-      })
+   
     }
-  }
-
-};   
+}
 </script>
 
 <style scoped>

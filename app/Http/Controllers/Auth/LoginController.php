@@ -40,11 +40,15 @@ class LoginController extends Controller
     }
 
     public function index(){
-        return view('home');
+        return view('sign');
     }
-    public function loginAction(Request $req){
+    public function login(Request $req){
         $dados = $req->only(['email', 'password']);
 
-        echo $dados;
+        $data = [
+            'name'=> $dados['email'],
+            'password'=> $dados['password']
+        ];
+        print_r($data);
     }
 }
