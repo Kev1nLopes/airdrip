@@ -1,8 +1,6 @@
 <template>
-  <section id="users">
-      <ul>
-          
-      </ul>
+  <section id="users" class="is-flex is-justify-content-center">
+      <h1 class="is-size-1">Users</h1>
   </section>
 </template>
 
@@ -16,6 +14,6 @@ export default {
     #users{
         width: 100%;
         height: 100vh;
-        background-color: red;
+        
     }
 </style>

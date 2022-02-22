@@ -2,9 +2,9 @@
 import Entrada from './dash/Entrada.vue';
 import Feedbacks from './dash/Feedbacks.vue';
 import Produtos from './dash/Produtos.vue';
-import Receita from './dash/Receita.vue';
 import Users from './dash/Users.vue';
 import Vendas from './dash/Vendas.vue';
+import NotFound from './view/NotFound.vue';
 
 
 
@@ -16,6 +16,7 @@ export default{
         {
             path: '/',
             component: Vendas,
+            name: 'Vendas'
         },
        
         {
@@ -29,11 +30,6 @@ export default{
             name: 'Feedbacks'
         },
         {
-            path: '/receita',
-            component: Receita,
-            name: 'Receita'
-        },
-        {
             path: '/produtos',
             component: Produtos,
             name: 'Produtos'
@@ -42,6 +38,11 @@ export default{
             path: '/users',
             component: Users,
             name: 'Users'
+        },
+        {
+            path: '*',
+            component: NotFound,
+            name: 'NotFound'
         }
     ]
     
