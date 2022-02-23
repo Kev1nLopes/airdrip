@@ -28,7 +28,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/{any}';
+    protected $redirectTo = 'home';
 
     /**
      * Create a new controller instance.
@@ -41,13 +41,13 @@ class LoginController extends Controller
     }
 
     public function index(){
-        return view('sign', ['login'=> "login"]);
+        return view('home');
     }
     public function login(Request $req){
         $dados = $req->only(['email', 'password']);
 
         if(Auth::attempt($dados)){
-            return redirect()->route('main');
+            return redirect()->route('home');
         }else{
             return redirect()->route('login')->with('warning', 'E-mail e/ou senha invalidos.');
         }
@@ -55,5 +55,6 @@ class LoginController extends Controller
     }
     public function logout(){
         Auth::logout();
+        return redirect()->route('home');
     }
 }

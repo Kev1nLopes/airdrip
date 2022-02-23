@@ -31,7 +31,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/{any}';
+    protected $redirectTo = 'home';
 
     /**
      * Create a new controller instance.
@@ -44,9 +44,7 @@ class RegisterController extends Controller
     }
 
     public function index(){
-        return view('sign', [
-            'login'=>"register"
-        ]);
+      
     }
     public function register(Request $request){
         $dados = $request->only(['name', 'email', 'password', 'password_confirmation', 'date_birth', 'contact']);

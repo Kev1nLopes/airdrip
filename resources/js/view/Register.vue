@@ -1,58 +1,60 @@
 <template>
-  <section id="login">
+ <section id="login">
     <div id="content" class="has-text-centered is-flex is-justify-content-center is-align-items-center">
-      <form  method="POST" action="/login" id="form-login" class="is-flex is-flex-direction-column has-text-left ">
+     <form method="POST" action="/register" id="form-register" class="is-flex is-flex-direction-column has-text-left ">
         <h3>AirDrip</h3>
         <p class="has-text-centered">Conforto até no pisar</p>
         <input type="hidden" name="_token" :value="csrf_token">
+        <label for="name">Nome:</label>
+        <input type="text" name="name" id="name" placeholder="Informe seu nome">
         <label for="email">E-mail:</label>
         <input type="email" name="email" id="email" autocomplete="off" placeholder="Informe seu e-mail"  />
-        <label for="password">Password:</label>
-        <input type="password" name="password" id="password" placeholder="Informe sua senha"  />
-        <input type="submit" value="Entrar" >
+        <label for="contact">Contato</label>
+        <input type="text" name="contact" id="contact" placeholder="(xx) xxxx-xxxx">
+        <label for="date_birth">Data de Nascimento</label>
+        <input type="date" name="date_birth" id="date_birth">
+        <label for="password">Senha:</label>
+        <input type="password" name="password" id="password" placeholder="Informe sua senha"/>
+        <label for="password_confirmation">Confirme a senha:</label>
+        <input type="password" name="password_confirmation" id="password_confirmation" placeholder="Informe sua senha novamente"/>
+        <input type="submit" value="Cadastrar" >
         <div class="is-flex is-justify-content-space-around">
-          <router-link class="has-text-centered" :to="{name: 'Register'}">Register</router-link>
+          <router-link class="has-text-" :to="{name: 'Login'}">Login</router-link>
           <router-link class="has-text-centered" :to="{name: 'Home'}">Retornar</router-link>
         </div>
-        
-      </form>
+     </form>
     </div>
-  </section>
+ </section>
 </template>
 
 <script>
 export default {
-  name: 'Login',
-  data(){
-    return{
-     csrf_token: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+    name: 'Register',
+    data(){
+        return{
+            csrf_token: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        }
     }
-  },
-  methods:{
-  }
 }
 </script>
 
 <style scoped>
- #login{
+#login{
    width: 100%;
    background: #797979;
    height: 100vh;
- }
- .warning{
-   color: red;
-   text-align: center;
  }
  #content{
    height: inherit;
    width: inherit;
  }
- #form-login{
-   height: 360px;
-   background: rgb(43, 43, 43);
+
+ #form-register{
    max-width: 350px;
    width: 100%;
+   height: 580px;
    padding: 20px;
+   background: rgb(43, 43, 43);
    color: white;
    border-radius: 5px;
    box-shadow: 5px 5px 15px 5px #000000;
@@ -88,5 +90,4 @@ export default {
  span:hover{
    cursor: pointer;
  }
- 
 </style>

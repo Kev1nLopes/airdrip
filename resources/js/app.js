@@ -1,8 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import routes from './routes';
-import dashRoutes from './dash';
-import Login from './view/Login.vue';
+import App from './view/App.vue';
 
 
 
@@ -19,11 +18,7 @@ Vue.use(Router);
 
 let app = new Vue({
     el: '#app',
-    components:{ Login },
+    components:{  App },
     router: new Router(routes)
 });
 
-let dashApp = new Vue({
-    el: '#dash',
-    router: new Router(dashRoutes)
-})
