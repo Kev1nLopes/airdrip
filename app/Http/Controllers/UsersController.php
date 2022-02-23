@@ -4,11 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class UsersController extends Controller
 {
+
+    public function __construct()
+    {
+        // $this->middleware('auth');
+    }
+
     public function createUser(Request $request){
         $array = ['error'=> ''];
 
@@ -35,8 +42,10 @@ class UsersController extends Controller
         $user->contact = $request->input('contact');
         $user->save();
 
+        Auth::login($user);
         return redirect()->route('home');
     }
+
     public function readAllUsers(){
         $array = ['error'=>''];
 
@@ -44,6 +53,7 @@ class UsersController extends Controller
 
         return $array;
     }
+
     public function readUser($id){
         $array = ['error'=>''];
 
@@ -54,11 +64,9 @@ class UsersController extends Controller
         }else{
             $array['error'] = 'Usuario nao encontrado!';
         }
-       
-
-
         return $array;
     }
+
     public function updateUser($id, Request $request){
         $array = ['error'=> ''];
 

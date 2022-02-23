@@ -16,15 +16,59 @@
         <router-link class="mt-4" :to="{ name: 'Home' }">Retornar</router-link>
       </aside>
       <section id="view">
-         <h1 class="has-text-centered has-text-white">Users</h1>
+        <div class="top-view is-flex is-align-items-center is-justify-content-center">
+          <h1 class="has-text-centered has-text-white">Users</h1>
+           <div class="right-content">
+            <router-link :to="{name: 'Register'}">Cadastrar Usuario</router-link>
+            <form method="POST">
+              <input type="text" name="product_name" id="product_name">
+            </form>
+          </div>
+        </div>
+        <div class="users-table is-flex is-justify-content-center">
+          <table>
+            <tr>
+              <th>Codigo</th>
+              <th>Nome</th> 
+              <th>Email</th>  
+              <th>CPF</th>  
+              <th>Contact</th>           
+            </tr>
+            <tr v-for="(user, index) in users" :key="index">
+              <td>{{user.id}}</td>
+              <td>{{user.name}}</td>
+              <td>{{user.email}}</td>
+              <td>{{user.cpf}}</td>
+              <td>{{user.contact}}</td>
+            </tr>
+          </table>
+        </div>
       </section>
     </main>
   </div>
 </template>
 
 <script>
+import axios from 'axios';
 export default {
-
+  name: 'Users',
+  data(){
+    return{
+      users: null
+    }
+  },
+  methods:{
+    getUsers(){
+      axios.get('http://localhost:8000/api/users')
+      .then(response =>{
+        this.users = response.data.list;
+        console.log(this.users)
+      })
+    }
+  },
+  mounted(){
+    this.getUsers();
+  } 
 }
 </script>
 
@@ -44,7 +88,8 @@ aside {
   max-width: 300px;
   width: 100%;
   height: 100vh;
-  
+  z-index: 1;
+   box-shadow: 11px 9px 15px 4px #000000;
 }
 
 #icon-user {
@@ -76,6 +121,40 @@ aside {
 }
 section#view {
   flex: 1;
-  background-color: black;
+  background-color: rgb(184, 179, 179);
 }
+.top-view{
+  height: 80px;
+  width: 100%;
+  background: rgb(134, 133, 133);
+  box-shadow: 11px 9px 15px 4px #000000;
+  position: relative;
+  z-index: 2;
+}
+.top-view .right-content{
+  position: absolute;
+  top:0;
+  right: 0;
+}
+.users-table{
+  width: 100%;
+  padding: 20px;
+}
+.users-table table{
+  width: 100%;
+  border: 1px solid #000;
+  max-height: 600px;
+  overflow-y: auto;
+  
+}
+.users.table tr,
+.users-table tr,
+.users-table th,
+.users-table td{
+  border: 1px solid #000;
+  max-height: 30px;
+  height: 100%;
+  text-align: center;
+}
+
 </style>

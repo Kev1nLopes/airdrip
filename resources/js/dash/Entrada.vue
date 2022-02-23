@@ -16,7 +16,9 @@
         <router-link class="mt-4" :to="{ name: 'Home' }">Retornar</router-link>
       </aside>
       <section id="view">
-        <h1 class="has-text-centered has-text-white">Entrada</h1>
+        <div class="top-view is-flex is-align-items-center is-justify-content-center">
+          <h1 class="has-text-centered has-text-white">Entrada</h1>
+        </div>
       </section>
     </main>
   </div>
@@ -39,11 +41,12 @@ main {
   width: 100%;
   min-height: 100vh;
 }
-
 aside {
   max-width: 300px;
   width: 100%;
   height: 100vh;
+  z-index: 1;
+   box-shadow: 11px 9px 15px 4px #000000;
   
 }
 
@@ -76,6 +79,19 @@ aside {
 }
 section#view {
   flex: 1;
-  background-color: black;
+  background-color: rgb(184, 179, 179);
+}
+.top-view{
+  height: 80px;
+  width: 100%;
+  background: rgb(134, 133, 133);
+  box-shadow: 11px 9px 15px 4px #000000;
+  position: relative;
+  z-index: 2;
+}
+.top-view a{
+  position: absolute;
+  top:0;
+  right: 0;
 }
 </style>

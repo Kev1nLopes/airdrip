@@ -9,6 +9,7 @@ import Home from './view/Home.vue';
 import About from './view/About.vue';
 import Login from './view/Login.vue';
 import Register from './view/Register.vue';
+import RegisterProduct from './view/RegisterProduct.vue';
 
 
 
@@ -35,6 +36,11 @@ export default{
             path: '/register',
             component: Register,
             name: 'Register'
+        },
+        {
+            path: '/register_product',
+            component: RegisterProduct,
+            name: 'RegisterProduct'
         },
         {
             path: '/dashboard',
