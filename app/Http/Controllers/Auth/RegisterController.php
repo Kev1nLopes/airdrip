@@ -31,7 +31,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/{any}';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -57,7 +57,7 @@ class RegisterController extends Controller
 
         $user = $this->create($dados);
         Auth::login($user);
-        return redirect()->route('main');
+        return redirect()->route('home');
     }
 
     /**

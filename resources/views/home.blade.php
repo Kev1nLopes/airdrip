@@ -23,9 +23,9 @@
       </div>
       <nav class="is-flex is-justify-content-space-between">
         <router-link :to="{ name: 'Home' }">Home</router-link>
-        <router-link :to="{ name: 'Home' }">Man</router-link>
-        <router-link :to="{ name: 'Home' }">Women</router-link>
-        <router-link :to="{ name: 'Home' }">Kids</router-link>
+        <router-link :to="{ name: 'Man' }">Man</router-link>
+        <router-link :to="{ name: 'Woman' }">Women</router-link>
+        <router-link :to="{ name: 'Kids' }">Kids</router-link>
         <router-link :to="{ name: 'About' }">About</router-link>
       </nav>
       <div class="search">
