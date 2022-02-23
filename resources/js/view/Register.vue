@@ -11,8 +11,8 @@
         <input type="email" name="email" id="email" autocomplete="off" placeholder="Informe seu e-mail"  />
         <label for="contact">Contato</label>
         <input type="text" name="contact" id="contact" placeholder="(xx) xxxx-xxxx">
-        <label for="date_birth">Data de Nascimento</label>
-        <input type="date" name="date_birth" id="date_birth">
+        <label for="cpf">CPF:</label>
+        <input type="text" name="cpf" id="cpf">
         <label for="password">Senha:</label>
         <input type="password" name="password" id="password" placeholder="Informe sua senha"/>
         <label for="password_confirmation">Confirme a senha:</label>

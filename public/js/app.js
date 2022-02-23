@@ -16541,7 +16541,7 @@ var render = function () {
                 _c(
                   "router-link",
                   {
-                    staticClass: "has-text-centered",
+                    staticClass: "has-text-",
                     attrs: { to: { name: "Register" } },
                   },
                   [_vm._v("Register")]
@@ -16690,13 +16690,9 @@ var render = function () {
               },
             }),
             _vm._v(" "),
-            _c("label", { attrs: { for: "date_birth" } }, [
-              _vm._v("Data de Nascimento"),
-            ]),
+            _c("label", { attrs: { for: "cpf" } }, [_vm._v("CPF:")]),
             _vm._v(" "),
-            _c("input", {
-              attrs: { type: "date", name: "date_birth", id: "date_birth" },
-            }),
+            _c("input", { attrs: { type: "text", name: "cpf", id: "cpf" } }),
             _vm._v(" "),
             _c("label", { attrs: { for: "password" } }, [_vm._v("Senha:")]),
             _vm._v(" "),
