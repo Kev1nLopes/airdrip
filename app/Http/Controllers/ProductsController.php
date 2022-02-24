@@ -15,7 +15,7 @@ class ProductsController extends Controller
             'name_product' => ['required', 'string', 'min:3', 'max:100'],
             'provider' => ['required', 'string', 'min:3', 'max:100'],
             'model'=> ['required', 'string', 'min:3', 'max:100', 'unique:products'],
-            'price' => ['required', 'numeric', 'between:0,99.99 ','max:20'],
+            'price' => ['required', 'numeric','max:9999 '],
             'sex' => ['required', 'string', 'min:1', 'max:20']
         ];
 
@@ -34,7 +34,7 @@ class ProductsController extends Controller
         $product->sex = $request->input('sex');
         $product->save();
 
-        return $array;
+        return redirect()->route('home');
     }
     public function readAllProducts(){
         $array = ['errors'=> ''];

@@ -31,14 +31,6 @@
             <tr>
                   
             </tr>
-            <tr v-for="(produto, index) in produtos" :key="index">
-              <td>{{produto.id}}</td>
-              <td>{{produto.name_product}}</td>
-              <td>{{produto.model}}</td>
-              <td>{{produto.provider}}</td>
-              <td>{{produto.price}}</td>
-              <td>{{produto.sex}}</td>
-            </tr>
           </table>
         </div>
       </section>

@@ -1,7 +1,7 @@
 <template>
  <section id="login">
     <div id="content" class="has-text-centered is-flex is-justify-content-center is-align-items-center">
-     <form method="POST" action="/register" id="form-register" class="is-flex is-flex-direction-column has-text-left ">
+     <form method="POST" action="api/product" id="form-register" class="is-flex is-flex-direction-column has-text-left ">
         <h3>AirDrip</h3>
         <p class="has-text-centered">Regitrar Produto</p>
         <input type="hidden" name="_token" :value="csrf_token">

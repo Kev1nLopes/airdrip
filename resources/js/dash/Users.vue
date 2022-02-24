@@ -33,7 +33,8 @@
               <th>Nome</th> 
               <th>Email</th>  
               <th>CPF</th>  
-              <th>Contato</th>           
+              <th>Contato</th>
+              <th>Ações</th>              
             </tr>
             <tr v-for="(user, index) in users" :key="index">
               <td>{{user.id}}</td>
@@ -41,6 +42,10 @@
               <td>{{user.email}}</td>
               <td>{{user.cpf}}</td>
               <td>{{user.contact}}</td>
+               <td>
+                <a href="">[Editar]</a>
+                <a href="">[Excluir]</a>
+              </td>
             </tr>
           </table>
         </div>

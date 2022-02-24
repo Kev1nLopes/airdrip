@@ -35,6 +35,7 @@
               <th>Fornecedor</th>  
               <th>Preço</th> 
               <th>Sexo</th>          
+              <th>Ações</th>          
             </tr>
             <tr v-for="(produto, index) in produtos" :key="index">
               <td>{{produto.id}}</td>
@@ -43,6 +44,10 @@
               <td>{{produto.provider}}</td>
               <td>{{produto.price}}</td>
               <td>{{produto.sex}}</td>
+              <td>
+                <a href="">[Editar]</a>
+                <a href="">[Excluir]</a>
+              </td>
             </tr>
           </table>
         </div>
