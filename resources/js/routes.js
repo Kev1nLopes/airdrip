@@ -4,12 +4,14 @@ import Feedbacks from './dash/Feedbacks.vue';
 import Produtos from './dash/Produtos.vue';
 import Users from './dash/Users.vue';
 import Vendas from './dash/Vendas.vue';
+import Updates from './dash/Updates.vue';
 import NotFound from './view/NotFound.vue';
 import Home from './view/Home.vue';
 import About from './view/About.vue';
 import Login from './view/Login.vue';
 import Register from './view/Register.vue';
 import RegisterProduct from './view/RegisterProduct.vue';
+
 
 
 
@@ -61,6 +63,11 @@ export default{
             path: '/dashboard/produtos',
             component: Produtos,
             name: 'Produtos'
+        },
+        {
+            path: '/dashboard/updates',
+            component: Updates,
+            name: 'Updates'
         },
         {
             path: '/dashboard/users',
