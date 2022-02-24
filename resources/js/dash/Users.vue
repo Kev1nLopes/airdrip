@@ -12,6 +12,7 @@
           <router-link :to="{ name: 'Vendas' }">Vendas</router-link>
           <router-link :to="{ name: 'Entrada' }">Entrada</router-link>
           <router-link :to="{ name: 'Feedbacks' }">Feedbacks</router-link>
+          <router-link :to="{ name: 'Updates' }">Atualizações</router-link>
         </nav>
         <router-link class="mt-4" :to="{ name: 'Home' }">Retornar</router-link>
       </aside>
@@ -21,7 +22,7 @@
            <div class="right-content">
             <router-link :to="{name: 'Register'}">Cadastrar Usuario</router-link>
             <form method="POST">
-              <input type="text" name="product_name" id="product_name">
+              <input type="text" name="name" id="name">
             </form>
           </div>
         </div>
@@ -32,7 +33,7 @@
               <th>Nome</th> 
               <th>Email</th>  
               <th>CPF</th>  
-              <th>Contact</th>           
+              <th>Contato</th>           
             </tr>
             <tr v-for="(user, index) in users" :key="index">
               <td>{{user.id}}</td>
@@ -147,7 +148,6 @@ section#view {
   overflow-y: auto;
   
 }
-.users.table tr,
 .users-table tr,
 .users-table th,
 .users-table td{

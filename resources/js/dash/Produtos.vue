@@ -12,20 +12,39 @@
           <router-link :to="{ name: 'Vendas' }">Vendas</router-link>
           <router-link :to="{ name: 'Entrada' }">Entrada</router-link>
           <router-link :to="{ name: 'Feedbacks' }">Feedbacks</router-link>
+          <router-link :to="{ name: 'Updates' }">Atualizações</router-link>
         </nav>
         <router-link class="mt-4" :to="{ name: 'Home' }">Retornar</router-link>
       </aside>
       <section id="view">
         <div class="top-view is-flex is-align-items-center is-justify-content-center">
-          <div class="right-content">
+          <h1 class="has-text-centered has-text-white">Produtos</h1>
+           <div class="right-content">
             <router-link :to="{name: 'RegisterProduct'}">Cadastrar Produto</router-link>
             <form method="POST">
-              <input type="text" name="product_name" id="product_name">s
+              <input type="text" name="product_name" id="product_name">
             </form>
           </div>
-          
-
-          <h1 class="has-text-centered has-text-white">Produtos</h1>
+        </div>
+        <div class="products-table is-flex is-justify-content-center">
+          <table>
+            <tr>
+              <th>Codigo</th>
+              <th>Produto</th> 
+              <th>Modelo</th>  
+              <th>Fornecedor</th>  
+              <th>Preço</th> 
+              <th>Sexo</th>          
+            </tr>
+            <tr v-for="(produto, index) in produtos" :key="index">
+              <td>{{produto.id}}</td>
+              <td>{{produto.name_product}}</td>
+              <td>{{produto.model}}</td>
+              <td>{{produto.provider}}</td>
+              <td>{{produto.price}}</td>
+              <td>{{produto.sex}}</td>
+            </tr>
+          </table>
         </div>
       </section>
     </main>
@@ -42,10 +61,15 @@ export default {
     }
   },
   methods:{
-    
+      getProducts(){
+      axios.get('http://localhost:8000/api/products')
+      .then(response =>{
+        this.produtos = response.data.list;
+      })
+    }
   },
-  mounted:{
-    
+  mounted(){
+    this.getProducts();
   }
   
 }
@@ -111,9 +135,28 @@ section#view {
   position: relative;
   z-index: 2;
 }
-.top-view a{
+.top-view .right-content{
   position: absolute;
   top:0;
   right: 0;
+}
+.products-table{
+  width: 100%;
+  padding: 20px;
+}
+.products-table table{
+  width: 100%;
+  border: 1px solid #000;
+  max-height: 600px;
+  overflow-y: auto;
+  
+}
+.products-table tr,
+.products-table th,
+.products-table td{
+  border: 1px solid #000;
+  max-height: 30px;
+  height: 100%;
+  text-align: center;
 }
 </style>

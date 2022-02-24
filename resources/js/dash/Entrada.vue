@@ -12,6 +12,7 @@
           <router-link :to="{ name: 'Vendas' }">Vendas</router-link>
           <router-link :to="{ name: 'Entrada' }">Entrada</router-link>
           <router-link :to="{ name: 'Feedbacks' }">Feedbacks</router-link>
+          <router-link :to="{ name: 'Updates' }">Atualizações</router-link>
         </nav>
         <router-link class="mt-4" :to="{ name: 'Home' }">Retornar</router-link>
       </aside>
