@@ -5,12 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Symfony\Component\HttpFoundation\Test\Constraint\ResponseFormatSame;
 
 class ProductsController extends Controller
 {
     public function createProduct(Request $request){
         $array = ['error'=> ''];
-
         $rules = [
             'name_product' => ['required', 'string', 'min:3', 'max:100'],
             'provider' => ['required', 'string', 'min:3', 'max:100'],
@@ -23,7 +23,7 @@ class ProductsController extends Controller
 
         if($validator->fails()){
             $array['error'] = $validator->errors();
-            return $array;
+            
         }
 
         $product = new Product();
@@ -34,7 +34,7 @@ class ProductsController extends Controller
         $product->sex = $request->input('sex');
         $product->save();
 
-        return redirect()->route('home');
+        
     }
     public function readAllProducts(){
         $array = ['errors'=> ''];
@@ -44,18 +44,12 @@ class ProductsController extends Controller
         return $array;
     }
     public function readProduct($id){
-        $array = ['errors'=>''];
 
-        $product = Product::find($id);
+        $product = Product::findOrFails($id);
 
-        if($product){
-            $array['product'] = $product;
-        }else{
-            $array['errors'] = "Nenhum produto foi encontrado!";
-        }
+        return response()->json($product);
 
-        return $array;
-
+        
     }
     public function updateProduct($id, Request $request){
         $array = ['errors'=> ''];
@@ -72,6 +66,7 @@ class ProductsController extends Controller
 
         if($validator->fails()){
             $array['errors'] = $validator->errors();
+            return response()->json($array, 422);
         }
 
         $produto = Product::find($id);

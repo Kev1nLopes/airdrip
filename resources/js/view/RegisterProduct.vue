@@ -1,44 +1,59 @@
 <template>
  <section id="login">
     <div id="content" class="has-text-centered is-flex is-justify-content-center is-align-items-center">
-     <form method="POST" action="api/product" id="form-register" class="is-flex is-flex-direction-column has-text-left ">
+     <div  id="form-register" class="is-flex is-flex-direction-column has-text-left ">
         <h3>AirDrip</h3>
         <p class="has-text-centered">Regitrar Produto</p>
         <input type="hidden" name="_token" :value="csrf_token">
 
         <label for="name_product">Nome:</label>
-        <input type="text" name="name_product" id="name_product" autocomplete="off" placeholder="Informe o nome do produto">
+        <input type="text" name="name_product" id="name_product" autocomplete="off" placeholder="Informe o nome do produto" v-model="product.name_product">
 
         <label for="provider">Fornecedor:</label>
-        <input type="text" name="provider" id="provider" autocomplete="off" placeholder="Informe o fornecedor"  />
-
+        <input type="text" name="provider" id="provider" autocomplete="off" placeholder="Informe o fornecedor" v-model="product.provider"  />
+        
         <label for="model">Modelo:</label>
-        <input type="text" name="model" id="model" placeholder="Informe o fornecedor">
+        <input type="text" name="model" id="model" placeholder="Informe o fornecedor" v-model="product.model">
 
         <label for="price">Valor:</label>
-        <input type="number" name="price" id="price" step="0.01">
+        <input type="number" name="price" id="price" step="0.01" v-model="product.price">
 
         <label for="sex">Sexo:</label>
-        <select name="sex">
+        <select name="sex" v-model="product.sex">
             <option value="Masculino">Masculino</option>
             <option value="Feminino">Feminino</option>
             <option value="outro" selected>Outro</option>
         </select>
-        <input type="submit" value="Cadastrar">
+
+        <input type="submit" value="Cadastrar" @click="registerProduct()">
         <div class="is-flex is-justify-content-space-around">
           <router-link class="has-text-centered" :to="{name: 'Produtos'}">Retornar</router-link>
         </div>
-     </form>
+     </div>
     </div>
  </section>
 </template>
 
 <script>
+import axios from 'axios';
 export default {
-    name: 'Register',
+    name: 'RegisterProduct',
     data(){
         return{
-            csrf_token: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            csrf_token: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+            product: {
+                name_product: null,
+                provider: null,
+                model: null,
+                price: null,
+                sex: null,
+            }
+        }
+    },
+    methods:{
+        registerProduct(){
+            axios.post('/api/product', this.product)
+            this.$router.push({ name: 'Home' })
         }
     }
 }

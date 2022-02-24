@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('login', [LoginController::class, 'index'])->name('login');
 Route::post('login', [LoginController::class, 'login']);
-Route::post('register', [UsersController::class, 'createUser']);
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::prefix('dashboard')->group(function(){

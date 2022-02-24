@@ -1,34 +1,48 @@
 <template>
   <section id="login">
     <div id="content" class="has-text-centered is-flex is-justify-content-center is-align-items-center">
-      <form  method="POST" action="/login" id="form-login" class="is-flex is-flex-direction-column has-text-left ">
+      <div id="form-login" class="is-flex is-flex-direction-column has-text-left ">
         <h3>AirDrip</h3>
         <p class="has-text-centered">Conforto até no pisar</p>
         <input type="hidden" name="_token" :value="csrf_token">
+
         <label for="email">E-mail:</label>
-        <input type="email" name="email" id="email" autocomplete="off" placeholder="Informe seu e-mail"  />
+        <input type="email" name="email" id="email" autocomplete="off" placeholder="Informe seu e-mail" v-model="data.email"  />
+
         <label for="password">Password:</label>
-        <input type="password" name="password" id="password" placeholder="Informe sua senha"  />
-        <input type="submit" value="Entrar" >
+        <input type="password" name="password" id="password" placeholder="Informe sua senha" v-model="data.password"  />
+        
+        <input type="submit" value="Entrar" @click="submit()">
         <div class="is-flex is-justify-content-space-around">
           <router-link class="has-text-" :to="{name: 'Register'}">Register</router-link>
           <router-link class="has-text-centered" :to="{name: 'Home'}">Retornar</router-link>
         </div>
-        
-      </form>
+      </div>
     </div>
   </section>
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   name: 'Login',
   data(){
     return{
-     csrf_token: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+     csrf_token: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+     data: {
+       email: null,
+       password: null
+     }
     }
   },
   methods:{
+    submit(){
+      axios.post('/login', this.data)
+      // .catch((error)=>{
+      //   console.log("deu erro");
+      // })
+      this.$router.push({ name: 'Home' })
+    }
   }
 }
 </script>

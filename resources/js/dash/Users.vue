@@ -43,8 +43,8 @@
               <td>{{user.cpf}}</td>
               <td>{{user.contact}}</td>
                <td>
-                <a href="">[Editar]</a>
-                <a href="">[Excluir]</a>
+                <a @click="changeUser(user.id)">[Editar]</a>
+                <a @click="deleteUser(user.id)">[Excluir]</a>
               </td>
             </tr>
           </table>
@@ -65,11 +65,21 @@ export default {
   },
   methods:{
     getUsers(){
-      axios.get('http://localhost:8000/api/users')
+      axios.get('/api/users')
       .then(response =>{
         this.users = response.data.list;
-        console.log(this.users)
+        
       })
+    },
+    deleteUser(id){
+      let confirm = confirm('Realmente deseja remover o usuario?');
+      if(confirm){
+        axios.delete(`/api/user/${id}`)
+        this.getUsers();
+      }
+      
+      
+      
     }
   },
   mounted(){

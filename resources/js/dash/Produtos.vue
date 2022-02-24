@@ -45,8 +45,8 @@
               <td>{{produto.price}}</td>
               <td>{{produto.sex}}</td>
               <td>
-                <a href="">[Editar]</a>
-                <a href="">[Excluir]</a>
+                <a @click="changeProduct($produto.id)">[Editar]</a>
+                <a @click="deleteProduct($produto.id)">[Excluir]</a>
               </td>
             </tr>
           </table>
@@ -67,10 +67,17 @@ export default {
   },
   methods:{
       getProducts(){
-      axios.get('http://localhost:8000/api/products')
+      axios.get('/api/products')
       .then(response =>{
         this.produtos = response.data.list;
       })
+    },
+    deleteProduct($id){
+      axios.delete(`/product/${$id}`)
+      .then(()=>{
+        alert('Produto removido!');
+      })
+      
     }
   },
   mounted(){

@@ -31,7 +31,7 @@ class UsersController extends Controller
 
         if($validator->fails()){
             $array['error'] = $validator->errors();
-            return $array;
+            return response()->json($array, 422);
         }
 
         $user = new User();
@@ -43,7 +43,7 @@ class UsersController extends Controller
         $user->save();
 
         Auth::login($user);
-        return redirect()->route('home');
+        return response()->json(['response'=>'deu tudo certo']);
     }
 
     public function readAllUsers(){

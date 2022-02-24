@@ -1,39 +1,76 @@
 <template>
  <section id="login">
     <div id="content" class="has-text-centered is-flex is-justify-content-center is-align-items-center">
-     <form method="POST" action="/register" id="form-register" class="is-flex is-flex-direction-column has-text-left ">
+     <div id="form-register" class="is-flex is-flex-direction-column has-text-left ">
         <h3>AirDrip</h3>
         <p class="has-text-centered">Conforto até no pisar</p>
         <input type="hidden" name="_token" :value="csrf_token">
         <label for="name">Nome:</label>
-        <input type="text" name="name" id="name" placeholder="Informe seu nome">
+        <input type="text" name="name" id="name" placeholder="Informe seu nome" v-model="user.name" >
+        <span v-if="errors" class="has-text-centered">{{errors.name[0]}}</span>
+        
         <label for="email">E-mail:</label>
-        <input type="email" name="email" id="email" autocomplete="off" placeholder="Informe seu e-mail"  />
+        <input type="email" name="email" id="email" autocomplete="off" placeholder="Informe seu e-mail" v-model="user.email"  />
+        <span v-if="errors" class="has-text-centered">{{errors.email[0]}}</span>
         <label for="contact">Contato</label>
-        <input type="text" name="contact" id="contact" placeholder="(xx) xxxx-xxxx">
+        <input type="text" name="contact" id="contact" placeholder="(xx) xxxx-xxxx" v-model="user.contact">
+        <span v-if="errors" class="has-text-centered">{{errors.contact[0]}}</span>
+       
         <label for="cpf">CPF:</label>
-        <input type="text" name="cpf" id="cpf">
+        <input type="text" name="cpf" id="cpf" v-model="user.cpf">
+        <span v-if="errors" class="has-text-centered">{{errors.cpf[0]}}</span>
+
         <label for="password">Senha:</label>
-        <input type="password" name="password" id="password" placeholder="Informe sua senha"/>
+        <input type="password" name="password" id="password" placeholder="Informe sua senha" v-model="user.password"/>
+        <span v-if="errors" class="has-text-centered">{{errors.password[0]}}</span>
+        
         <label for="password_confirmation">Confirme a senha:</label>
-        <input type="password" name="password_confirmation" id="password_confirmation" placeholder="Informe sua senha novamente"/>
-        <input type="submit" value="Cadastrar" >
+        <input type="password" name="password_confirmation" id="password_confirmation" placeholder="Informe sua senha novamente" v-model="user.password_confirmation"/>
+
+        <input type="submit" value="Cadastrar" @click="submit()" >
         <div class="is-flex is-justify-content-space-around">
           <router-link class="has-text-" :to="{name: 'Login'}">Login</router-link>
           <router-link class="has-text-centered" :to="{name: 'Home'}">Retornar</router-link>
         </div>
-     </form>
+     </div>
     </div>
  </section>
 </template>
 
 <script>
+import axios from 'axios';
 export default {
     name: 'Register',
     data(){
         return{
-            csrf_token: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            csrf_token: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+            user: {
+              name: null,
+              email: null,
+              contact: null,
+              cpf: null,
+              password: null,
+              password_confirmation: null,
+            },
+            errors: {
+              name
+            },
         }
+    },
+    methods:{
+      submit(){
+        axios.post("/register", this.user)
+          .then((response) => {
+            console.log(response)
+          })
+          .catch((error) => {
+            this.errors = error.response.data.error;
+           })
+        this.$router.push({ name: 'Home' })    
+      }
+    },
+    mounted(){
+
     }
 }
 </script>
