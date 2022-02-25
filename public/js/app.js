@@ -15759,6 +15759,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'Login',
@@ -15768,7 +15769,8 @@ __webpack_require__.r(__webpack_exports__);
       data: {
         email: null,
         password: null
-      }
+      },
+      error: null
     };
   },
   methods: {
@@ -15777,10 +15779,10 @@ __webpack_require__.r(__webpack_exports__);
 
       axios__WEBPACK_IMPORTED_MODULE_0___default().post('/login', this.data).then(function (response) {
         _this.$router.push({
-          name: 'Produtos'
+          path: 'dashboard/users'
         });
       })["catch"](function (error) {
-        console.log("deu erro");
+        _this.error = error.response.data.error;
       });
     }
   }
@@ -15878,8 +15880,12 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     submit: function submit() {
+      var _this = this;
+
       axios__WEBPACK_IMPORTED_MODULE_0___default().post("/api/user", this.user).then(function (response) {
-        console.log(response);
+        _this.$router.push({
+          path: '/dashboard/users'
+        });
       })["catch"](function (error) {
         console.log(error.response.data.error);
       });
@@ -15939,6 +15945,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'RegisterProduct',
@@ -15950,16 +15959,25 @@ __webpack_require__.r(__webpack_exports__);
         provider: null,
         model: null,
         price: null,
-        sex: null
+        sex: null,
+        photo: null
       }
     };
   },
   methods: {
     registerProduct: function registerProduct() {
-      axios__WEBPACK_IMPORTED_MODULE_0___default().post('/api/product', this.product);
-      this.$router.push({
-        name: 'Home'
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post('/api/product', this.product).then(function (response) {
+        console.log(response);
+      })["catch"](function (error) {
+        console.log(error);
       });
+    },
+    fileChange: function fileChange(e) {
+      var files = e.target.files || e.dataTransfer.files;
+
+      if (!files.lenght) {
+        return;
+      }
     }
   }
 });
@@ -20206,6 +20224,14 @@ var render = function () {
               domProps: { value: _vm.csrf_token },
             }),
             _vm._v(" "),
+            _vm.error
+              ? _c(
+                  "span",
+                  { staticClass: "has-text-centered has-text-danger" },
+                  [_vm._v(_vm._s(_vm.error))]
+                )
+              : _vm._e(),
+            _vm._v(" "),
             _c("label", { attrs: { for: "email" } }, [_vm._v("E-mail:")]),
             _vm._v(" "),
             _c("input", {
@@ -20769,6 +20795,13 @@ var render = function () {
                   _vm.$set(_vm.product, "price", $event.target.value)
                 },
               },
+            }),
+            _vm._v(" "),
+            _c("label", { attrs: { for: "photo" } }, [_vm._v("Foto")]),
+            _vm._v(" "),
+            _c("input", {
+              attrs: { type: "file", name: "photo", id: "photo" },
+              on: { change: _vm.fileChange },
             }),
             _vm._v(" "),
             _c("label", { attrs: { for: "sex" } }, [_vm._v("Sexo:")]),

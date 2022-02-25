@@ -7,6 +7,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class LoginController extends Controller
 {
@@ -47,14 +48,14 @@ class LoginController extends Controller
         $dados = $req->only(['email', 'password']);
 
         if(Auth::attempt($dados)){
-            return redirect()->route('home');
+            return response()->json(['login'=> 'Deu tudo certo']);
         }else{
-            return redirect()->route('login')->with('warning', 'E-mail e/ou senha invalidos.');
+            return response()->json(['error'=> 'E-mail e/ou senha incorretos'], 422);
         }
         
     }
     public function logout(){
         Auth::logout();
-        return redirect()->route('home');
+        return Redirect::route('home');
     }
 }

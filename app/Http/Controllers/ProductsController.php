@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Symfony\Component\HttpFoundation\Test\Constraint\ResponseFormatSame;
 
 class ProductsController extends Controller
 {
@@ -33,8 +32,6 @@ class ProductsController extends Controller
         $product->price = $request->input('price');
         $product->sex = $request->input('sex');
         $product->save();
-
-        
     }
     public function readAllProducts(){
         $array = ['errors'=> ''];
@@ -49,7 +46,6 @@ class ProductsController extends Controller
 
         return response()->json($product);
 
-        
     }
     public function updateProduct($id, Request $request){
         $array = ['errors'=> ''];

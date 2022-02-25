@@ -57,7 +57,7 @@ export default {
       submit(){
         axios.post("/api/user", this.user)
           .then((response) => {
-            console.log(response)
+            this.$router.push({path: '/dashboard/users'});
           })
           .catch((error) => {
             console.log(error.response.data.error)

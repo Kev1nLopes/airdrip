@@ -6,6 +6,7 @@
         <p class="has-text-centered">Conforto até no pisar</p>
         <input type="hidden" name="_token" :value="csrf_token">
 
+        <span v-if="error" class="has-text-centered has-text-danger">{{error}}</span>
         <label for="email">E-mail:</label>
         <input type="email" name="email" id="email" autocomplete="off" placeholder="Informe seu e-mail" v-model="data.email"  />
 
@@ -32,17 +33,19 @@ export default {
      data: {
        email: null,
        password: null
-     }
+     },
+     error: null
     }
   },
   methods:{
     submit(){
       axios.post('/login', this.data)
       .then(response=>{
-        this.$router.push({ name: 'Produtos' });
+        this.$router.push({path: 'dashboard/users'});
       })
       .catch((error)=>{
-        console.log("deu erro");
+        this.error= error.response.data.error;
+         
       })
       
     }

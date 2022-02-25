@@ -18,6 +18,9 @@
         <label for="price">Valor:</label>
         <input type="number" name="price" id="price" step="0.01" v-model="product.price">
 
+        <label for="photo">Foto</label>
+        <input type="file" name="photo" id="photo" @change="fileChange">
+
         <label for="sex">Sexo:</label>
         <select name="sex" v-model="product.sex">
             <option value="Masculino">Masculino</option>
@@ -47,13 +50,23 @@ export default {
                 model: null,
                 price: null,
                 sex: null,
+                photo: null,
             }
         }
     },
     methods:{
         registerProduct(){
             axios.post('/api/product', this.product)
-            this.$router.push({ name: 'Home' })
+            .then(response=>{
+              console.log(response);
+            })
+            .catch(error=>{
+              console.log(error);
+            })
+        },
+        fileChange(e){
+          let files = e.target.files || e.dataTransfer.files;
+          if(!files.lenght){ return;}
         }
     }
 }
