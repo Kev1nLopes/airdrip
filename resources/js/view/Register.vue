@@ -5,6 +5,9 @@
         <h3>AirDrip</h3>
         <p class="has-text-centered">Conforto até no pisar</p>
         <input type="hidden" name="_token" :value="csrf_token">
+        <div class="has-text-danger" v-for="(er, index) in error" :key="index">
+          {{er[0]}}
+        </div>
         <label for="name">Nome:</label>
         <input type="text" name="name" id="name" placeholder="Informe seu nome" v-model="user.name" >
        
@@ -31,6 +34,7 @@
           <router-link class="has-text-centered" :to="{name: 'Home'}">Retornar</router-link>
         </div>
      </div>
+     
     </div>
  </section>
 </template>
@@ -50,6 +54,9 @@ export default {
               password: null,
               password_confirmation: null,
             },
+            error:{
+              
+            }
           
         }
     },
@@ -60,7 +67,7 @@ export default {
             this.$router.push({path: '/dashboard/users'});
           })
           .catch((error) => {
-            console.log(error.response.data.error)
+            this.error = {...error.response.data.error}
            })
           
       }
