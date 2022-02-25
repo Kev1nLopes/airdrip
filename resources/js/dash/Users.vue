@@ -72,14 +72,14 @@ export default {
       })
     },
     deleteUser(id){
-      let confirm = confirm('Realmente deseja remover o usuario?');
-      if(confirm){
+      let result = confirm('Realmente deseja remover o usuario?');
+      if(result){
         axios.delete(`/api/user/${id}`)
         this.getUsers();
       }
-      
-      
-      
+    },
+    changeUser(id){
+      this.$router.push({path: `/update_user/${id}`})
     }
   },
   mounted(){

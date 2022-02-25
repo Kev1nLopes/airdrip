@@ -38,10 +38,13 @@ export default {
   methods:{
     submit(){
       axios.post('/login', this.data)
-      // .catch((error)=>{
-      //   console.log("deu erro");
-      // })
-      this.$router.push({ name: 'Home' })
+      .then(response=>{
+        this.$router.push({ name: 'Produtos' });
+      })
+      .catch((error)=>{
+        console.log("deu erro");
+      })
+      
     }
   }
 }

@@ -5,9 +5,9 @@ use App\Http\Controllers\UsersController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('auth:sanctum')->get('/api', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/api', function (Request $request) {
+//     return $request->user();
+// });
 
 Route::post('/product', [ProductsController::class, 'createProduct']);
 Route::get('/products', [ProductsController::class, 'readAllProducts']);

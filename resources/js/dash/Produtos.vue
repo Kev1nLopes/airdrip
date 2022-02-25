@@ -45,8 +45,8 @@
               <td>{{produto.price}}</td>
               <td>{{produto.sex}}</td>
               <td>
-                <a @click="changeProduct($produto.id)">[Editar]</a>
-                <a @click="deleteProduct($produto.id)">[Excluir]</a>
+                <a @click="changeProduct(produto.id)">[Editar]</a>
+                <a @click="deleteProduct(produto.id)">[Excluir]</a>
               </td>
             </tr>
           </table>
@@ -72,11 +72,13 @@ export default {
         this.produtos = response.data.list;
       })
     },
-    deleteProduct($id){
-      axios.delete(`/product/${$id}`)
-      .then(()=>{
-        alert('Produto removido!');
-      })
+    deleteProduct(id){
+      let result = confirm('Realmente deseja remover esse produto?');
+      if(result){
+        axios.delete(`/api/product/${id}`)
+        this.getProducts();
+      }
+      
       
     }
   },

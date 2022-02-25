@@ -42,31 +42,34 @@ export default {
     data(){
         return{
             csrf_token: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-            user: {
-              name: null,
-              email: null,
-              contact: null,
-              cpf: null,
-              password: null,
-              password_confirmation: null,
-            },
+            user: {},
+            param: this.$route.params.id,
           
         }
     },
     methods:{
-      submit(){
-        axios.post("/api/user", this.user)
+      getData(){
+        axios.get(`/api/user/${this.param}`)
           .then((response) => {
-            console.log(response)
+            this.user = {...response.data.user, password: '', password_confirmation: ''};
+            console.log(this.user)
           })
           .catch((error) => {
             console.log(error.response.data.error)
            })
-          
+      },
+      submit(){
+        axios.put(`/api/user/${this.param}`, this.user)
+        .then(response=>{
+          this.$router.push({path: '/dashboard/users'})
+        })
+        .catch(error=>{
+          console.log(error)
+        })
       }
     },
-    mounted(){
-
+    created(){
+      this.getData();
     }
 }
 </script>

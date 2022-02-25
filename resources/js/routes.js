@@ -10,6 +10,7 @@ import Home from './view/Home.vue';
 import About from './view/About.vue';
 import Login from './view/Login.vue';
 import Register from './view/Register.vue';
+import UpdateUser from './view/UpdateUser.vue';
 import RegisterProduct from './view/RegisterProduct.vue';
 
 
@@ -38,6 +39,12 @@ export default{
             path: '/register',
             component: Register,
             name: 'Register'
+        },
+        {
+            path: '/update_user/:id',
+            component: UpdateUser,
+            name: 'UpdateUser',
+            props: true,
         },
         {
             path: '/register_product',

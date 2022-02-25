@@ -10,4 +10,5 @@ class Product extends Model
     use HasFactory;
 
     public $timestamps = false;
+    const UPDATED_AT = null;
 }
