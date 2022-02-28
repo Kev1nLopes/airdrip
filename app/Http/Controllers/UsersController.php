@@ -96,7 +96,7 @@ class UsersController extends Controller
             $user->cpf =   $request->input('cpf');
             $user->contact = $request->input('contact');
             $user->save();
-
+            
         }
     }
     public function deleteUser($id){

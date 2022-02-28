@@ -11,12 +11,12 @@ Route::middleware('auth:sanctum')->get('/api', function (Request $request) {
 
 Route::post('/product', [ProductsController::class, 'createProduct']);
 Route::get('/products', [ProductsController::class, 'readAllProducts']);
-Route::get('/product/{id}', [ProductsController::class, 'readProduct'])->middleware('auth');
-Route::put('/product/{id}', [ProductsController::class, 'updateProduct'])->middleware('auth');
-Route::delete('/product/{id}', [ProductsController::class, 'deleteProduct'])->middleware('auth');
+Route::get('/product/{id}', [ProductsController::class, 'readProduct']);
+Route::put('/product/{id}', [ProductsController::class, 'updateProduct']);
+Route::delete('/product/{id}', [ProductsController::class, 'deleteProduct']);
 
 Route::post('/user', [UsersController::class, 'createUser']);
 Route::get('/users', [UsersController::class, 'readAllUsers']);
-Route::get('/user/{id}', [UsersController::class, 'readUser'])->middleware('auth');
-Route::put('/user/{id}', [UsersController::class, 'updateUser'])->middleware('auth');
-Route::delete('/user/{id}', [UsersController::class, 'deleteUser'])->middleware('auth');
+Route::get('/user/{id}', [UsersController::class, 'readUser']);
+Route::put('/user/{id}', [UsersController::class, 'updateUser']);
+Route::delete('/user/{id}', [UsersController::class, 'deleteUser']);

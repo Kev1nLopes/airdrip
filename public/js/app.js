@@ -15974,10 +15974,6 @@ __webpack_require__.r(__webpack_exports__);
     },
     fileChange: function fileChange(e) {
       var files = e.target.files || e.dataTransfer.files;
-
-      if (!files.lenght) {
-        return;
-      }
     }
   }
 });

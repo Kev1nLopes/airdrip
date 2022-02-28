@@ -66,9 +66,8 @@ export default {
         },
         fileChange(e){
           let files = e.target.files || e.dataTransfer.files;
-          if(!files.lenght){ return;}
-        }
     }
+  }
 }
 </script>
 
