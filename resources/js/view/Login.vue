@@ -25,6 +25,8 @@
 
 <script>
 import axios from 'axios';
+import Cookie from 'js-cookie';
+import {mapState} from 'vuex';
 export default {
   name: 'Login',
   data(){
@@ -34,21 +36,37 @@ export default {
        email: null,
        password: null
      },
-     error: null
+     error: null,
+     headers:{
+       'Content-Type': 'application/json',
+       'Access': 'application/json'
+     }
     }
+  },
+  created(){
+    Cookie.remove('token');
   },
   methods:{
     submit(){
-      axios.post('/login', this.data)
+      axios.post('api/login', this.data, this.headers)
       .then(response=>{
-        this.$router.push({path: 'dashboard/users'});
+        this.$store.commit('changeToken', response.data.access_token);
+        this.$store.commit('changeType', response.data.token_type);
+        this.$store.commit('changeUser', response.data.user[0])
+        this.$store.commit('login', true);
+        //deixei o token como Cookie e como global com vuex, nao sei qual a melhor pratica
+        Cookie.set('token', response.data.access_token);
+        this.$router.push({path: '/'});
+        
       })
       .catch((error)=>{
-        this.error= error.response.data.error;
+        this.error = 'E-mail e/ou senha invalidos!'
          
       })
-      
     }
+  },
+  computed:{
+    ...mapState(["token"])
   }
 }
 </script>

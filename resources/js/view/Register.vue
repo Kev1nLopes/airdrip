@@ -64,9 +64,13 @@ export default {
       submit(){
         axios.post("/api/user", this.user)
           .then((response) => {
-            this.$router.push({path: '/dashboard/users'});
+            this.$store.commit('changeToken', response.data.token);
+            this.$store.commit('login', true);
+            this.$store.commit('changeUser', response.data.user)
+            this.$router.push({path: '/'});
           })
           .catch((error) => {
+            console.log(error);
             this.error = {...error.response.data.error}
            })
           

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -27,5 +28,12 @@ class HomeController extends Controller
     }
     public function dashboard(){
         return view('home');
+    }
+    public function verifyAuth(){
+        if(Auth::check()){
+          return response()->json(['loged'=> true]);
+        }else{
+          return response()->json(['loged'=> false], 422);
+        }
     }
 }

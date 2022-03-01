@@ -21,9 +21,9 @@ class UsersController extends Controller
 
         $rules = [
             'name' => ['required', 'string', 'max:100'],
-            'email' => ['required', 'string', 'email', 'max:100', 'unique:users'],
+            'email' => ['required', 'email', 'max:100', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'cpf'=> ['required', 'string', 'min:11', 'max:15', 'unique:users'],
+            'cpf'=> ['required', 'string', 'min:11', 'max:11', 'unique:users'],
             'contact' => ['required', 'string', 'max:15']
         ];
 
@@ -42,8 +42,8 @@ class UsersController extends Controller
         $user->contact = $request->input('contact');
         $user->save();
 
-        Auth::login($user);
-        return response()->json(['response'=>'deu tudo certo']);
+        $token = Auth::login($user);
+        return response()->json(['user'=>$user, 'token'=> $token]);
     }
 
     public function readAllUsers(){
@@ -57,13 +57,23 @@ class UsersController extends Controller
     public function readUser($id){
         $array = ['error'=>''];
 
+
         $user = User::find($id);
 
-        if($user){
-            $array['user'] = $user;
+        if(!$user){
+          $user = User::where('name', 'like', "%$id%")->get();
+          $array['user'] = $user;
+          return response()->json($array['user']);
+        }else if($user){
+          $array['user'] = $user;
+          return response()->json($array['user']);
         }else{
-            $array['error'] = 'Usuario nao encontrado!';
+          $array['error'] = "Nenhum usuario encontrado";
+          return response()->json($array['error'], 422);
         }
+       
+
+       
         return $array;
     }
 
@@ -76,7 +86,7 @@ class UsersController extends Controller
             'email'=>['string', 'max:100', ],
             'password'=>['string', 'min:8'],
             'cpf'=>['string', 'min:11', 'max:15'],
-            'contact'=>['string', 'max:15']
+            'contact'=>['string', 'min:', 'max:15']
         ];
     
         $validator = Validator::make($request->all(), $rules);

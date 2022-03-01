@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
@@ -46,11 +47,11 @@ class LoginController extends Controller
     }
     public function login(Request $req){
         $dados = $req->only(['email', 'password']);
-
         if(Auth::attempt($dados)){
-            return response()->json(['login'=> 'Deu tudo certo']);
+          $user = User::where('email', $req->input('email'))->get();
+          return response()->json(['user'=> $user]);
         }else{
-            return response()->json(['error'=> 'E-mail e/ou senha incorretos'], 422);
+          
         }
         
     }

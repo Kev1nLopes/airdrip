@@ -52,10 +52,9 @@ export default {
         axios.get(`/api/user/${this.param}`)
           .then((response) => {
             this.user = {...response.data.user, password: '', password_confirmation: ''};
-            console.log(this.user)
           })
           .catch((error) => {
-            console.log(error.response.data.error)
+            
            })
       },
       submit(){

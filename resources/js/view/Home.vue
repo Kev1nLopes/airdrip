@@ -1,23 +1,23 @@
 <template>
-    <div id="home">
-        <Header></Header>
-        <main>
-            <section class="home is-flex container is-justify-content-center is-align-items-center mx-auto">
-                <div class="grid-columns container">
-                    <div v-for="(product, index) in products" :key="index" class="card is-flex is-flex-direction-column is-align-items-center">
-                        <h1 class="mt-3 is-size-3 has-text-weight-medium">{{product.name_product}}</h1>
-                        <div class="fake-img mt-2">
-                            <img src="" alt="Tenis imagem">
-                        </div>
-                        <h3 class="mt-5 is-size-4">R$ {{product.price}}</h3>
-                        <div class="">Marca: {{product.provider}}</div>
-                        <div class="">{{product.model}} | {{product.sex}}</div>
-                    </div>
-                </div>
-            </section>
-        </main>
-        <Footer></Footer>
-    </div>
+  <div id="home">
+    <Header></Header>
+    <main>
+      <section class="home is-flex container is-justify-content-center is-align-items-center mx-auto">
+        <div class="grid-columns container">
+          <div v-for="(product, index) in products" :key="index" class="card is-flex is-flex-direction-column is-align-items-center">
+            <h1 class="mt-3 is-size-3 has-text-weight-medium">{{product.name_product}}</h1>
+            <div class="fake-img mt-2">
+              <img src="" alt="Tenis imagem">
+            </div>
+            <h3 class="mt-5 is-size-4">R$ {{product.price}}</h3>
+            <div class="">Marca: {{product.provider}}</div>
+            <div class="">{{product.model}} | {{product.sex}}</div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <Footer></Footer>
+  </div>
 </template>
 
 <script>
@@ -41,9 +41,9 @@ export default {
             .then(response=>{
                 this.products = response.data.list;
             })
-        }
+        },
     },
-    mounted(){
+    created(){
         this.getProducts();
     }
     

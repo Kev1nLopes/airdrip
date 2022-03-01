@@ -4,8 +4,7 @@
       <Aside></Aside>
       <section id="view">
         <div class="top-view is-flex is-align-items-center is-justify-content-center">
-          <router-link to="CadastrarProduto">Cadastrar Produto</router-link>
-         <h1 class="has-text-centered has-text-white">Feedbacks</h1>
+          <h1 class="has-text-centered has-text-white">Entrada</h1>
         </div>
       </section>
     </main>
@@ -15,8 +14,8 @@
 <script>
 import Aside from './Aside.vue'
 export default {
-  name:'Feedbacks.vue',
-  components: {Aside}
+  name:'Entrada',
+  components: { Aside }
 }
 </script>
 
