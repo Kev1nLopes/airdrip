@@ -1,7 +1,13 @@
 <template>
-  <footer class="is-flex is-align-items-center is-flex-direction-column has-text-centered">
-    <h3>AirDrip</h3>
-    <p>Todos direitos reservados... <br> menos o seu</p>
+  <footer class="is-flex is-align-items-center is-justify-content-space-evenly has-text-centered">
+    <div class="is-flex is-flex-direction-column">
+      <h3>AirDrip</h3>
+      <p>Todos direitos reservados... <br> menos o seu</p>
+    </div>
+    <ul class="footer-infos">
+      <li><router-link :to="{name: 'Feedbacks'}">Feedback</router-link> </li>
+    </ul>
+
   </footer> 
 </template>
 

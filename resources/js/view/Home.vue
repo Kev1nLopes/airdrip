@@ -62,6 +62,7 @@ export default {
         place-items: center;
     }
     .card{
+        min-width: 250px;
         height: 300px;
         background-color: #ccc;
         border-radius: 3px;
