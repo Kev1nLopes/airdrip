@@ -1,6 +1,6 @@
 <template>
  <section id="login">
-    <div id="content" class="has-text-centered is-flex is-justify-content-center is-align-items-center">
+    <div id="content" class="has-text-centered is-flex is-justify-content-center is-align-items-center mt-5">
      <div id="form-register" class="is-flex is-flex-direction-column has-text-left ">
         <h3>AirDrip</h3>
         <p class="has-text-centered">Conforto até no pisar</p>
@@ -51,7 +51,7 @@ export default {
       getData(){
         axios.get(`/api/user/${this.param}`)
           .then((response) => {
-            this.user = {...response.data.user, password: '', password_confirmation: ''};
+            this.user = {...response.data, password: '', password_confirmation: ''};
           })
           .catch((error) => {
             
@@ -60,7 +60,7 @@ export default {
       submit(){
         axios.put(`/api/user/${this.param}`, this.user)
         .then(response=>{
-          this.$router.push({path: '/dashboard/users'})
+          this.$router.push({path: '/dashboard'});
         })
         .catch(error=>{
           console.log(error)

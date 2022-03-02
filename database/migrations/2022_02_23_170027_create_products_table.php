@@ -19,7 +19,7 @@ class CreateProductsTable extends Migration
             $table->string('model')->unique();
             $table->string('provider');
             $table->double('price', 8, 2);
-            $table->string('sex');
+            $table->string('gender');
             $table->timestamps();
         });
     }

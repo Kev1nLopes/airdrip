@@ -72,9 +72,9 @@ export default {
     },
     find(){
       if(this.search != null){
-        axios.get(`/api/user/${this.search}`)
+        axios.get(`/api/search/${this.search}`)
         .then(response=>{
-          this.users = response.data
+          console.log(response.data)
         })
         .catch(error=>{
           this.users = null

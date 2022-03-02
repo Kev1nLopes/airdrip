@@ -45,6 +45,7 @@ export default{
             path: '/update_user/:id',
             component: UpdateUser,
             name: 'UpdateUser',
+            props: true,
             beforeEnter: Middleware.auth
         },
         {

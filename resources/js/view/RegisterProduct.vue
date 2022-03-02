@@ -1,7 +1,7 @@
 <template>
  <section id="login">
     <div id="content" class="has-text-centered is-flex is-justify-content-center is-align-items-center">
-     <div  id="form-register" class="is-flex is-flex-direction-column has-text-left ">
+      <div  id="form-register" class="is-flex is-flex-direction-column has-text-left ">
         <h3>AirDrip</h3>
         <p class="has-text-centered">Regitrar Produto</p>
         <input type="hidden" name="_token" :value="csrf_token">
@@ -18,11 +18,8 @@
         <label for="price">Valor:</label>
         <input type="number" name="price" id="price" step="0.01" v-model="product.price">
 
-        <label for="photo">Foto</label>
-        <input type="file" name="photo" id="photo" @change="fileChange">
-
         <label for="sex">Sexo:</label>
-        <select name="sex" v-model="product.sex">
+        <select name="sex" v-model="product.gender">
             <option value="Masculino">Masculino</option>
             <option value="Feminino">Feminino</option>
             <option value="outro" selected>Outro</option>
@@ -30,9 +27,9 @@
 
         <input type="submit" value="Cadastrar" @click="registerProduct()">
         <div class="is-flex is-justify-content-space-around">
-          <router-link class="has-text-centered" :to="{name: 'Produtos'}">Retornar</router-link>
+          <router-link class="has-text-centered" :to="{name: 'Products'}">Retornar</router-link>
         </div>
-     </div>
+      </div>
     </div>
  </section>
 </template>
@@ -49,8 +46,8 @@ export default {
                 provider: null,
                 model: null,
                 price: null,
-                sex: null,
-                photo: null,
+                gender: null,
+               
             }
         }
     },
@@ -58,15 +55,12 @@ export default {
         registerProduct(){
             axios.post('/api/product', this.product)
             .then(response=>{
-              console.log(response);
+              this.$router.push({path: '/dashboard/products'})
             })
             .catch(error=>{
               console.log(error);
             })
         },
-        fileChange(e){
-          let files = e.target.files || e.dataTransfer.files;
-    }
   }
 }
 </script>

@@ -60,21 +60,23 @@ class UsersController extends Controller
 
         $user = User::find($id);
 
-        if(!$user){
-          $user = User::where('name', 'like', "%$id%")->get();
-          $array['user'] = $user;
-          return response()->json($array['user']);
-        }else if($user){
+        if($user){
           $array['user'] = $user;
           return response()->json($array['user']);
         }else{
           $array['error'] = "Nenhum usuario encontrado";
           return response()->json($array['error'], 422);
         }
-       
-
-       
+      
         return $array;
+    }
+    public function searchUser($name){
+      $user = User::where('name', 'like', "$name%");
+      if($user){
+        return response()->json(['user'=>$user]);
+      }else{
+        return response()->json(['error'=> "Nenhum usuario encontrado"], 422);
+      }
     }
 
     public function updateUser($id, Request $request){

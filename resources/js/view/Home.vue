@@ -58,7 +58,7 @@ export default {
         display: grid;
         grid-template-columns: repeat( auto-fill, minmax(250px, 1fr) );
         gap: 50px;
-        align-items: center;
+        place-items: center;
     }
     .card{
         height: 300px;

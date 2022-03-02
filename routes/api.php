@@ -25,6 +25,7 @@ Route::delete('/product/{id}', [ProductsController::class, 'deleteProduct']);
 Route::post('/user', [UsersController::class, 'createUser']);
 Route::get('/users', [UsersController::class, 'readAllUsers']);
 Route::get('/user/{id}', [UsersController::class, 'readUser']);
+Route::get('/search/{name}', [UsersController::class, 'searchUser']);
 Route::put('/user/{id}', [UsersController::class, 'updateUser'])->middleware('jwt.auth');
 Route::delete('/user/{id}', [UsersController::class, 'deleteUser'])->middleware('jwt.auth');
 

@@ -15563,8 +15563,8 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       if (this.search != null) {
-        axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/user/".concat(this.search)).then(function (response) {
-          _this2.users = response.data;
+        axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/search/".concat(this.search)).then(function (response) {
+          console.log(response.data);
         })["catch"](function (error) {
           _this2.users = null;
         });
@@ -15989,9 +15989,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'RegisterProduct',
@@ -16003,21 +16000,21 @@ __webpack_require__.r(__webpack_exports__);
         provider: null,
         model: null,
         price: null,
-        sex: null,
-        photo: null
+        gender: null
       }
     };
   },
   methods: {
     registerProduct: function registerProduct() {
+      var _this = this;
+
       axios__WEBPACK_IMPORTED_MODULE_0___default().post('/api/product', this.product).then(function (response) {
-        console.log(response);
+        _this.$router.push({
+          path: '/dashboard/products'
+        });
       })["catch"](function (error) {
         console.log(error);
       });
-    },
-    fileChange: function fileChange(e) {
-      var files = e.target.files || e.dataTransfer.files;
     }
   }
 });
@@ -16095,7 +16092,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this = this;
 
       axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/user/".concat(this.param)).then(function (response) {
-        _this.user = _objectSpread(_objectSpread({}, response.data.user), {}, {
+        _this.user = _objectSpread(_objectSpread({}, response.data), {}, {
           password: '',
           password_confirmation: ''
         });
@@ -16106,7 +16103,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       axios__WEBPACK_IMPORTED_MODULE_0___default().put("/api/user/".concat(this.param), this.user).then(function (response) {
         _this2.$router.push({
-          path: '/dashboard/users'
+          path: '/dashboard'
         });
       })["catch"](function (error) {
         console.log(error);
@@ -16320,6 +16317,7 @@ __webpack_require__.r(__webpack_exports__);
     path: '/update_user/:id',
     component: _view_UpdateUser_vue__WEBPACK_IMPORTED_MODULE_11__["default"],
     name: 'UpdateUser',
+    props: true,
     beforeEnter: _services_middleware_js__WEBPACK_IMPORTED_MODULE_13__["default"].auth
   }, {
     path: '/registrar_produto',
@@ -16660,7 +16658,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.home[data-v-14c26dca]{\n    height: inherit;\n}\n.grid-columns[data-v-14c26dca]{\n    display: grid;\n    grid-template-columns: repeat( auto-fill, minmax(250px, 1fr) );\n    gap: 50px;\n    align-items: center;\n}\n.card[data-v-14c26dca]{\n    height: 300px;\n    background-color: #ccc;\n    border-radius: 3px;\n    transition: .3s;\n}\n.card[data-v-14c26dca]:hover{\n   transform: scale(1.1);\n}\n.fake-img[data-v-14c26dca]{\n    width: 50%;\n    height: 120px;\n    background: black;\n    box-shadow: 5px 5px 15px 5px #000000; \n    transition: .3s;\n}\n.fake-img[data-v-14c26dca]:hover{\n    transform: scale(1.1);\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.home[data-v-14c26dca]{\n    height: inherit;\n}\n.grid-columns[data-v-14c26dca]{\n    display: grid;\n    grid-template-columns: repeat( auto-fill, minmax(250px, 1fr) );\n    gap: 50px;\n    place-items: center;\n}\n.card[data-v-14c26dca]{\n    height: 300px;\n    background-color: #ccc;\n    border-radius: 3px;\n    transition: .3s;\n}\n.card[data-v-14c26dca]:hover{\n   transform: scale(1.1);\n}\n.fake-img[data-v-14c26dca]{\n    width: 50%;\n    height: 120px;\n    background: black;\n    box-shadow: 5px 5px 15px 5px #000000; \n    transition: .3s;\n}\n.fake-img[data-v-14c26dca]:hover{\n    transform: scale(1.1);\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -20820,13 +20818,6 @@ var render = function () {
               },
             }),
             _vm._v(" "),
-            _c("label", { attrs: { for: "photo" } }, [_vm._v("Foto")]),
-            _vm._v(" "),
-            _c("input", {
-              attrs: { type: "file", name: "photo", id: "photo" },
-              on: { change: _vm.fileChange },
-            }),
-            _vm._v(" "),
             _c("label", { attrs: { for: "sex" } }, [_vm._v("Sexo:")]),
             _vm._v(" "),
             _c(
@@ -20836,8 +20827,8 @@ var render = function () {
                   {
                     name: "model",
                     rawName: "v-model",
-                    value: _vm.product.sex,
-                    expression: "product.sex",
+                    value: _vm.product.gender,
+                    expression: "product.gender",
                   },
                 ],
                 attrs: { name: "sex" },
@@ -20853,7 +20844,7 @@ var render = function () {
                       })
                     _vm.$set(
                       _vm.product,
-                      "sex",
+                      "gender",
                       $event.target.multiple ? $$selectedVal : $$selectedVal[0]
                     )
                   },
@@ -20891,7 +20882,7 @@ var render = function () {
                   "router-link",
                   {
                     staticClass: "has-text-centered",
-                    attrs: { to: { name: "Produtos" } },
+                    attrs: { to: { name: "Products" } },
                   },
                   [_vm._v("Retornar")]
                 ),
@@ -20932,7 +20923,7 @@ var render = function () {
       "div",
       {
         staticClass:
-          "has-text-centered is-flex is-justify-content-center is-align-items-center",
+          "has-text-centered is-flex is-justify-content-center is-align-items-center mt-5",
         attrs: { id: "content" },
       },
       [

@@ -15,7 +15,7 @@ class ProductsController extends Controller
             'provider' => ['required', 'string', 'min:3', 'max:100'],
             'model'=> ['required', 'string', 'min:3', 'max:100', 'unique:products'],
             'price' => ['required', 'numeric','max:9999 '],
-            'sex' => ['required', 'string', 'min:1', 'max:20']
+            'gender' => ['required', 'string', 'min:1', 'max:20']
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -30,7 +30,7 @@ class ProductsController extends Controller
         $product->provider = $request->input('provider');
         $product->model = $request->input('model');
         $product->price = $request->input('price');
-        $product->sex = $request->input('sex');
+        $product->gender = $request->input('gender');
         $product->save();
     }
     public function readAllProducts(){
@@ -55,7 +55,7 @@ class ProductsController extends Controller
             'provider'=> ['string', 'min:3', 'max:100'],
             'model'=> ['string', 'min:3', 'max:100', 'unique:products'],
             'price'=> ['numeric', 'between:0,99.99', 'max:20'],
-            'sex'=> ['string', 'min:1', 'max:20']
+            'gender'=> ['string', 'min:1', 'max:20']
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -72,7 +72,7 @@ class ProductsController extends Controller
             $produto->provider = $request->input('provider');
             $produto->model = $request->input('model');
             $produto->price = $request->input('price');
-            $produto->sex = $request->input('sex');
+            $produto->gender = $request->input('gender');
             $produto->save();
         }else{
             $array['errors'] = "Este produto nao existe";
