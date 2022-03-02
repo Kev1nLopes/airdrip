@@ -74,7 +74,8 @@ export default {
       if(this.search != null){
         axios.get(`/api/search/${this.search}`)
         .then(response=>{
-          console.log(response.data)
+          this.users = response.data.user;
+          console.log(response.data.user);
         })
         .catch(error=>{
           this.users = null

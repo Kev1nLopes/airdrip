@@ -32,7 +32,9 @@ class ProductsController extends Controller
         $product->price = $request->input('price');
         $product->gender = $request->input('gender');
         $product->save();
+        
     }
+
     public function readAllProducts(){
         $array = ['errors'=> ''];
 
@@ -40,6 +42,7 @@ class ProductsController extends Controller
 
         return $array;
     }
+
     public function readProduct($id){
 
         $product = Product::findOrFails($id);
@@ -47,6 +50,7 @@ class ProductsController extends Controller
         return response()->json($product);
 
     }
+
     public function updateProduct($id, Request $request){
         $array = ['errors'=> ''];
 
@@ -78,13 +82,10 @@ class ProductsController extends Controller
             $array['errors'] = "Este produto nao existe";
         }
 
-
         return $array;
 
-        
-
-
     }
+
     public function deleteProduct($id){
         $array = ['errors'=> ''];
         $produto = Product::find($id);

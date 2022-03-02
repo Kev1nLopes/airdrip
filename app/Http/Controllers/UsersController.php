@@ -71,7 +71,7 @@ class UsersController extends Controller
         return $array;
     }
     public function searchUser($name){
-      $user = User::where('name', 'like', "$name%");
+      $user = User::where('name', 'like', "$name%")->get();
       if($user){
         return response()->json(['user'=>$user]);
       }else{

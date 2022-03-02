@@ -15332,6 +15332,9 @@ __webpack_require__.r(__webpack_exports__);
         axios__WEBPACK_IMPORTED_MODULE_0___default()["delete"]("/api/product/".concat(id));
         this.getProducts();
       }
+    },
+    searchProducts: function searchProducts() {
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/search/{product}').then(function (response) {});
     }
   },
   mounted: function mounted() {
@@ -15564,7 +15567,8 @@ __webpack_require__.r(__webpack_exports__);
 
       if (this.search != null) {
         axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/search/".concat(this.search)).then(function (response) {
-          console.log(response.data);
+          _this2.users = response.data.user;
+          console.log(response.data.user);
         })["catch"](function (error) {
           _this2.users = null;
         });
@@ -20307,6 +20311,15 @@ var render = function () {
               attrs: { type: "submit", value: "Entrar" },
               on: {
                 click: function ($event) {
+                  return _vm.submit()
+                },
+                keydown: function ($event) {
+                  if (
+                    !$event.type.indexOf("key") &&
+                    _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                  ) {
+                    return null
+                  }
                   return _vm.submit()
                 },
               },

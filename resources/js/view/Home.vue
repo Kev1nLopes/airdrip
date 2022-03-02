@@ -42,6 +42,7 @@ export default {
                 this.products = response.data.list;
             })
         },
+        
     },
     created(){
         this.getProducts();

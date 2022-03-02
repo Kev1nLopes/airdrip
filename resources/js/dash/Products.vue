@@ -66,8 +66,12 @@ export default {
         axios.delete(`/api/product/${id}`)
         this.getProducts();
       }
-      
-      
+    },
+    searchProducts(){
+      axios.get('/api/search/{product}')
+      .then(response=>{
+            
+       })
     }
   },
   mounted(){

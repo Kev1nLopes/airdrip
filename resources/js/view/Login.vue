@@ -13,7 +13,7 @@
         <label for="password">Password:</label>
         <input type="password" name="password" id="password" placeholder="Informe sua senha" v-model="data.password"  />
         
-        <input type="submit" value="Entrar" @click="submit()">
+        <input type="submit" value="Entrar" @click="submit()" @keydown.enter="submit()">
         <div class="is-flex is-justify-content-space-around">
           <router-link class="has-text-" :to="{name: 'Register'}">Register</router-link>
           <router-link class="has-text-centered" :to="{name: 'Home'}">Retornar</router-link>
