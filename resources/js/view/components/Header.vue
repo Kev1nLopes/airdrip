@@ -9,9 +9,14 @@
           <router-link :to="{name: 'Login'}">Login</router-link>
         </div>
         <div class="sign has-text-weight-semibold" v-else>
-          <ul class="is-flex">
+          <ul class="is-flex user is-justify-content-space-around">
             <li>{{user.name}}</li>
-            <li><font-awesome-icon icon="fa-solid fa-user-astronaut" /></li>
+            <li class="is-flex is-flex-direction-column is-justify-content-center">
+              <font-awesome-icon icon="fa-solid fa-user-astronaut" />
+              <ul class="sub-menu">
+                <li><a  @click="logout()">Logout</a></li>
+              </ul>
+            </li>
           </ul>
         </div>
       </div>
@@ -37,6 +42,8 @@
 <script>
 import axios from 'axios';
 import {mapState} from 'vuex';
+import Cookie from 'js-cookie';
+
 export default {
   name: 'Home',
   data(){
@@ -45,18 +52,15 @@ export default {
     }
   },
   methods:{
-   verifyAuth(){
-     axios.get('/api/me')
-     .then(response=>{
-       
-     })
-     .catch(error=>{
-       
-     })
-   }
+    logout(){
+      Cookie.remove('token');
+      this.$store.commit('changeUser', null);
+      this.$store.commit('login', false);
+    }
+   
   },
   created(){
-    this.verifyAuth();
+    
   },
   computed:{
     ...mapState(["loged", "user"])
@@ -82,5 +86,29 @@ export default {
   #header-main nav{
     max-width: 200px;
     width: 100%;
+  }
+  ul.user{
+    width: 80px;
+    position: relative;
+    
+  }
+  .sub-menu{
+    width: inherit;
+    display: none;
+    transition: .5s;
+  }
+   ul.user:hover .sub-menu{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    position: absolute;
+    top: 20px;
+    right: 0;
+    left: 0;
+    height: 30px;
+    background: #ccc;
+    z-index: 3;
+    
   }
 </style>

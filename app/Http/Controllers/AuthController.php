@@ -35,7 +35,7 @@ class AuthController extends Controller
   }
   public function logout(){
     Auth::logout();
-    return "boa noite bruno";
+    
   }
   public function refresh(){
     return 'refresh';

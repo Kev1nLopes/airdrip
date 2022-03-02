@@ -15607,6 +15607,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -16156,7 +16157,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! js-cookie */ "./node_modules/js-cookie/dist/js.cookie.mjs");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
@@ -16199,6 +16201,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -16207,14 +16215,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     return {};
   },
   methods: {
-    verifyAuth: function verifyAuth() {
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/me').then(function (response) {})["catch"](function (error) {});
+    logout: function logout() {
+      js_cookie__WEBPACK_IMPORTED_MODULE_1__["default"].remove('token');
+      this.$store.commit('changeUser', null);
+      this.$store.commit('login', false);
     }
   },
-  created: function created() {
-    this.verifyAuth();
-  },
-  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapState)(["loged", "user"]))
+  created: function created() {},
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapState)(["loged", "user"]))
 });
 
 /***/ }),
@@ -16614,7 +16622,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.about[data-v-1a8079fe] {\r\n  height: inherit;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.about[data-v-1a8079fe] {\r\n  height: inherit;\n}\n.about p[data-v-1a8079fe]{\r\n  max-width: 600px;\r\n  text-align: center;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -16830,7 +16838,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nheader{\n   min-height: 80px;\n   box-shadow: 0px 8px 10px 0px #000000;\n}\n#header-main{\n   width: 100%;\n}\n#header-main a{\n   color: black;\n}\n#header-main a:hover{\n   color: #ccc;\n}\n#header-main nav{\n   max-width: 200px;\n   width: 100%;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nheader{\n   min-height: 80px;\n   box-shadow: 0px 8px 10px 0px #000000;\n}\n#header-main{\n   width: 100%;\n}\n#header-main a{\n   color: black;\n}\n#header-main a:hover{\n   color: #ccc;\n}\n#header-main nav{\n   max-width: 200px;\n   width: 100%;\n}\nul.user{\n   width: 80px;\n   position: relative;\n}\n.sub-menu{\n   width: inherit;\n   display: none;\n   transition: .5s;\n}\nul.user:hover .sub-menu{\n   display: flex;\n   justify-content: center;\n   align-items: center;\n   color: white;\n   position: absolute;\n   top: 20px;\n   right: 0;\n   left: 0;\n   height: 30px;\n   background: #ccc;\n   z-index: 3;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -20068,9 +20076,17 @@ var staticRenderFns = [
         "section",
         {
           staticClass:
-            "about is-flex container is-justify-content-center is-align-items-center",
+            "about is-flex is-flex-direction-column container is-justify-content-center is-align-items-center",
         },
-        [_vm._v("\n      About\n    ")]
+        [
+          _c("h1", { staticClass: "is-size-1" }, [_vm._v("About")]),
+          _vm._v(" "),
+          _c("p", [
+            _vm._v(
+              "AirDrip is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+            ),
+          ]),
+        ]
       ),
     ])
   },
@@ -21279,19 +21295,46 @@ var render = function () {
                     1
                   )
                 : _c("div", { staticClass: "sign has-text-weight-semibold" }, [
-                    _c("ul", { staticClass: "is-flex" }, [
-                      _c("li", [_vm._v(_vm._s(_vm.user.name))]),
-                      _vm._v(" "),
-                      _c(
-                        "li",
-                        [
-                          _c("font-awesome-icon", {
-                            attrs: { icon: "fa-solid fa-user-astronaut" },
-                          }),
-                        ],
-                        1
-                      ),
-                    ]),
+                    _c(
+                      "ul",
+                      {
+                        staticClass:
+                          "is-flex user is-justify-content-space-around",
+                      },
+                      [
+                        _c("li", [_vm._v(_vm._s(_vm.user.name))]),
+                        _vm._v(" "),
+                        _c(
+                          "li",
+                          {
+                            staticClass:
+                              "is-flex is-flex-direction-column is-justify-content-center",
+                          },
+                          [
+                            _c("font-awesome-icon", {
+                              attrs: { icon: "fa-solid fa-user-astronaut" },
+                            }),
+                            _vm._v(" "),
+                            _c("ul", { staticClass: "sub-menu" }, [
+                              _c("li", [
+                                _c(
+                                  "a",
+                                  {
+                                    on: {
+                                      click: function ($event) {
+                                        return _vm.logout()
+                                      },
+                                    },
+                                  },
+                                  [_vm._v("Logout")]
+                                ),
+                              ]),
+                            ]),
+                          ],
+                          1
+                        ),
+                      ]
+                    ),
                   ]),
             ]
           ),
