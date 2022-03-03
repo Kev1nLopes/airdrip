@@ -29,7 +29,7 @@
               <td>{{produto.model}}</td>
               <td>{{produto.provider}}</td>
               <td>{{produto.price}}</td>
-              <td>{{produto.sex}}</td>
+              <td>{{produto.gender}}</td>
               <td>
                 <a @click="changeProduct(produto.id)">[Editar]</a>
                 <a @click="deleteProduct(produto.id)">[Excluir]</a>
@@ -54,7 +54,7 @@ export default {
     }
   },
   methods:{
-      getProducts(){
+    getProducts(){
       axios.get('/api/products')
       .then(response =>{
         this.produtos = response.data.list;

@@ -3,29 +3,16 @@
     <div id="content" class="has-text-centered is-flex is-justify-content-center is-align-items-center">
       <div  id="form-register" class="is-flex is-flex-direction-column has-text-left ">
         <h3>AirDrip</h3>
-        <p class="has-text-centered">Regitrar Produto</p>
+        <p class="has-text-centered">Enviar feeback</p>
         <input type="hidden" name="_token" :value="csrf_token">
 
-        <label for="name_product">Nome:</label>
-        <input type="text" name="name_product" id="name_product" autocomplete="off" placeholder="Informe o nome do produto" v-model="product.name_product">
+        <label for="reason">Motivo:</label>
+        <input type="text" name="reason" id="reason" autocomplete="off" placeholder="Informe o motivo" v-model="feedback.reason">
 
-        <label for="provider">Fornecedor:</label>
-        <input type="text" name="provider" id="provider" autocomplete="off" placeholder="Informe o fornecedor" v-model="product.provider"  />
+        <label for="text">Texto:</label>
+        <textarea name="text" id="text" cols="30" rows="10" placeholder="Feedback" style="resize: none; overflow-y: scroll;" v-model="feedback.text"></textarea>
         
-        <label for="model">Modelo:</label>
-        <input type="text" name="model" id="model" placeholder="Informe o fornecedor" v-model="product.model">
-
-        <label for="price">Valor:</label>
-        <input type="number" name="price" id="price" step="0.01" v-model="product.price">
-
-        <label for="sex">Sexo:</label>
-        <select name="sex" v-model="product.gender">
-            <option value="Masculino">Masculino</option>
-            <option value="Feminino">Feminino</option>
-            <option value="outro" selected>Outro</option>
-        </select>
-
-        <input type="submit" value="Cadastrar" @click="registerProduct()">
+        <input type="submit" value="Enviar" @click="sendFeedback()">
         <div class="is-flex is-justify-content-space-around">
           <router-link class="has-text-centered" :to="{name: 'Products'}">Retornar</router-link>
         </div>
@@ -36,32 +23,34 @@
 
 <script>
 import axios from 'axios';
+import { mapState } from 'vuex';
 export default {
     name: 'RegisterProduct',
     data(){
         return{
             csrf_token: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-            product: {
-                name_product: null,
-                provider: null,
-                model: null,
-                price: null,
-                gender: null,
+            feedback: {
+                reason: null,
+                text: null,
+                user: user.name
                
             }
         }
     },
     methods:{
-        registerProduct(){
-            axios.post('/api/product', this.product)
+        sendFeedback(){
+            axios.post('api/createFeedback', this.feedback)
             .then(response=>{
-              this.$router.push({path: '/dashboard/products'})
+
             })
             .catch(error=>{
-              console.log(error);
+                
             })
-        },
-  }
+        }
+    },
+    computed:{
+       ...mapState(["user"])
+    }
 }
 </script>
 
@@ -79,7 +68,7 @@ export default {
  #form-register{
    max-width: 350px;
    width: 100%;
-   height: 580px;
+   height: 400px;
    padding: 20px;
    background: rgb(43, 43, 43);
    color: white;

@@ -22,6 +22,7 @@ class ProductsController extends Controller
 
         if($validator->fails()){
             $array['error'] = $validator->errors();
+            return response()->json($array['error'], 422);
             
         }
 
