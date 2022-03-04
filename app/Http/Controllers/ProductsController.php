@@ -10,21 +10,23 @@ class ProductsController extends Controller
 {
     public function createProduct(Request $request){
         $array = ['error'=> ''];
-        $rules = [
-            'name_product' => ['required', 'string', 'min:3', 'max:100'],
-            'provider' => ['required', 'string', 'min:3', 'max:100'],
-            'model'=> ['required', 'string', 'min:3', 'max:100', 'unique:products'],
-            'price' => ['required', 'numeric','max:9999 '],
-            'gender' => ['required', 'string', 'min:1', 'max:20']
-        ];
 
-        $validator = Validator::make($request->all(), $rules);
+        // $rules = [
+        //     'name_product' => ['required', 'string', 'min:3', 'max:100'],
+        //     'provider' => ['required', 'string', 'min:3', 'max:100'],
+        //     'model'=> ['required', 'string', 'min:3', 'max:100', 'unique:products'],
+        //     'price' => ['required', 'numeric','max:9999 '],
+        //     'gender' => ['required', 'string', 'min:1', 'max:20'],
+        //     'photo' => ['required', 'mimes:jpg,png'] 
+        // ];
 
-        if($validator->fails()){
-            $array['error'] = $validator->errors();
-            return response()->json($array['error'], 422);
+        // $validator = Validator::make($request->all(), $rules);
+
+        // if($validator->fails()){
+        //     $array['error'] = $validator->errors();
+        //     return response()->json($array['error'], 422);
             
-        }
+        // }
 
         $product = new Product();
         $product->name_product = $request->input('name_product');
@@ -32,6 +34,8 @@ class ProductsController extends Controller
         $product->model = $request->input('model');
         $product->price = $request->input('price');
         $product->gender = $request->input('gender');
+        $product->file_name = $request->input('file_name');
+        $product->path = $request->file('file')->store('teste');  
         $product->save();
         
     }

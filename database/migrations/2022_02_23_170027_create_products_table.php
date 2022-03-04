@@ -20,6 +20,8 @@ class CreateProductsTable extends Migration
             $table->string('provider');
             $table->double('price', 8, 2);
             $table->string('gender');
+            $table->string('path');
+            $table->string('file_name');
             $table->timestamps();
         });
     }

@@ -15,6 +15,9 @@
         <label for="model">Modelo:</label>
         <input type="text" name="model" id="model" placeholder="Informe o fornecedor" v-model="product.model">
 
+        <label for="photo">Foto</label>
+        <input type="file" name="photo" id="photo"  @change="newfile">
+
         <label for="price">Valor:</label>
         <input type="number" name="price" id="price" step="0.01" v-model="product.price">
 
@@ -25,7 +28,7 @@
             <option value="outro" selected>Outro</option>
         </select>
 
-        <input type="submit" value="Cadastrar" @click="registerProduct()">
+        <input type="submit" value="Cadastrar" @click="submit()">
         <div class="is-flex is-justify-content-space-around">
           <router-link class="has-text-centered" :to="{name: 'Products'}">Retornar</router-link>
         </div>
@@ -47,20 +50,42 @@ export default {
                 model: null,
                 price: null,
                 gender: null,
+                file: null,
                
             }
         }
     },
     methods:{
-        registerProduct(){
-            axios.post('/api/product', this.product)
-            .then(response=>{
-              this.$router.push({path: '/dashboard/products'})
-            })
-            .catch(error=>{
-              console.log(error);
-            })
+        // registerProduct(){
+        //     axios.post('/api/product', this.product)
+        //     .then(response=>{
+        //       this.$router.push({path: '/dashboard/products'})
+        //     })
+        //     .catch(error=>{
+        //       console.log(error);
+        //     })
+        // },
+        newfile(e){
+          this.product.file = e.target.files[0];
         },
+        submit(){
+            var form = new FormData()
+            form.append('name_product', this.product.name_product);
+            form.append('provider', this.product.provider);
+            form.append('model', this.product.model);
+            form.append('price', this.product.price);
+            form.append('gender', this.product.gender);
+            form.append('file', this.product.file);
+            form.append('file_name', this.product.file.name);
+
+            axios.post('./api/product', form, {headers:{
+              'Content-Type': 'multipart/form-data'
+            }})
+            .then(response=>{
+              console.log(response)
+            })
+
+        }
   }
 }
 </script>
