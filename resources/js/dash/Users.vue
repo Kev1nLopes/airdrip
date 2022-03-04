@@ -8,7 +8,7 @@
            <div class="right-content">
             <router-link :to="{name: 'Register'}">Cadastrar Usuario</router-link>
             <div>
-              <input type="text" name="name" id="name" v-model="search" @keydown="find()">
+              <input type="text" name="name" id="name" v-model="search" @change="find">
             </div>
           </div>
         </div>
@@ -71,15 +71,19 @@ export default {
       this.$router.push({path: `/update_user/${id}`})
     },
     find(){
-      if(this.search != null){
-        axios.get(`/api/search/${this.search}`)
+      let clsSearch = (this.search || '').trim();
+
+      if(!clsSearch.length){
+        this.getUsers();
+      }
+
+      axios.get(`/api/search/${clsSearch}`)
         .then(response=>{
           this.users = response.data.user;
         })
         .catch(error=>{
-          this.users = null
+          this.getUsers();
         })
-      }
     }
     
   },

@@ -15565,13 +15565,17 @@ __webpack_require__.r(__webpack_exports__);
     find: function find() {
       var _this2 = this;
 
-      if (this.search != null) {
-        axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/search/".concat(this.search)).then(function (response) {
-          _this2.users = response.data.user;
-        })["catch"](function (error) {
-          _this2.users = null;
-        });
+      var clsSearch = (this.search || '').trim();
+
+      if (!clsSearch.length) {
+        this.getUsers();
       }
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/search/".concat(clsSearch)).then(function (response) {
+        _this2.users = response.data.user;
+      })["catch"](function (error) {
+        _this2.getUsers();
+      });
     }
   },
   mounted: function mounted() {
@@ -20191,9 +20195,7 @@ var render = function () {
                       attrs: { type: "text", name: "name", id: "name" },
                       domProps: { value: _vm.search },
                       on: {
-                        keydown: function ($event) {
-                          return _vm.find()
-                        },
+                        change: _vm.find,
                         input: function ($event) {
                           if ($event.target.composing) {
                             return
