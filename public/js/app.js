@@ -15780,6 +15780,7 @@ __webpack_require__.r(__webpack_exports__);
 
       axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/products').then(function (response) {
         _this.products = response.data.list;
+        console.log(_this.products);
       });
     }
   },
@@ -15861,6 +15862,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'RegisterProduct',
@@ -15872,20 +15876,39 @@ __webpack_require__.r(__webpack_exports__);
         provider: null,
         model: null,
         price: null,
-        gender: null
+        gender: null,
+        file: null
       }
     };
   },
   methods: {
-    registerProduct: function registerProduct() {
-      var _this = this;
-
-      axios__WEBPACK_IMPORTED_MODULE_0___default().post('/api/product', this.product).then(function (response) {
-        _this.$router.push({
-          path: '/dashboard/products'
-        });
-      })["catch"](function (error) {
-        console.log(error);
+    // registerProduct(){
+    //     axios.post('/api/product', this.product)
+    //     .then(response=>{
+    //       this.$router.push({path: '/dashboard/products'})
+    //     })
+    //     .catch(error=>{
+    //       console.log(error);
+    //     })
+    // },
+    newfile: function newfile(e) {
+      this.product.file = e.target.files[0];
+    },
+    submit: function submit() {
+      var form = new FormData();
+      form.append('name_product', this.product.name_product);
+      form.append('provider', this.product.provider);
+      form.append('model', this.product.model);
+      form.append('price', this.product.price);
+      form.append('gender', this.product.gender);
+      form.append('file', this.product.file);
+      form.append('file_name', this.product.file.name);
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post('./api/product', form, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }).then(function (response) {
+        console.log(response);
       });
     }
   }
@@ -16410,9 +16433,10 @@ __webpack_require__.r(__webpack_exports__);
     props: true,
     beforeEnter: _services_middleware_js__WEBPACK_IMPORTED_MODULE_9__["default"].auth
   }, {
-    path: '/registrar_produto',
+    path: '/register_product',
     component: _view_Product_RegisterProduct_vue__WEBPACK_IMPORTED_MODULE_13__["default"],
-    name: 'RegisterProduct'
+    name: 'RegisterProduct',
+    beforeEnter: _services_middleware_js__WEBPACK_IMPORTED_MODULE_9__["default"].auth
   }, {
     path: '/send_feedback',
     component: _view_Feedback_SendFeedback__WEBPACK_IMPORTED_MODULE_14__["default"],
@@ -16536,7 +16560,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\naside[data-v-4bce704e] {\r\n  max-width: 300px;\r\n  width: 100%;\r\n  height: 100vh;\r\n  z-index: 1;\r\n  box-shadow: 11px 9px 15px 4px #000000;\n}\n#icon-user[data-v-4bce704e] {\r\n  width: 100px;\r\n  height: 100px;\r\n  border-radius: 50%;\r\n  background-color: black;\r\n  justify-self: center;\r\n  margin-top: 30px;\n}\n#aside-nav[data-v-4bce704e] {\r\n  width: 100%;\r\n  height: 300px;\r\n  margin-top: 30px;\n}\n#aside-nav a[data-v-4bce704e] {\r\n  height: inherit;\r\n  width: inherit;\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  border: 1px solid rgb(134, 133, 133);\n}\n#aside-nav a[data-v-4bce704e]:hover {\r\n  background-color: rgb(134, 133, 133);\r\n  cursor: pointer;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\naside[data-v-4bce704e] {\n  max-width: 300px;\n  width: 100%;\n  height: 100vh;\n  z-index: 1;\n  box-shadow: 11px 9px 15px 4px #000000;\n}\n#icon-user[data-v-4bce704e] {\n  width: 100px;\n  height: 100px;\n  border-radius: 50%;\n  background-color: black;\n  justify-self: center;\n  margin-top: 30px;\n}\n#aside-nav[data-v-4bce704e] {\n  width: 100%;\n  height: 300px;\n  margin-top: 30px;\n}\n#aside-nav a[data-v-4bce704e] {\n  height: inherit;\n  width: inherit;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  border: 1px solid rgb(134, 133, 133);\n}\n#aside-nav a[data-v-4bce704e]:hover {\n  background-color: rgb(134, 133, 133);\n  cursor: pointer;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -16560,7 +16584,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n*[data-v-214f7ea2] {\r\n  padding: 0px;\r\n  margin: 0px;\r\n  box-sizing: border-box;\n}\nbody[data-v-214f7ea2],\r\nmain[data-v-214f7ea2] {\r\n  width: 100%;\r\n  min-height: 100vh;\n}\nsection#view[data-v-214f7ea2] {\r\n  flex: 1;\r\n  background-color: rgb(184, 179, 179);\n}\n.top-view[data-v-214f7ea2]{\r\n  height: 80px;\r\n  width: 100%;\r\n  background: rgb(134, 133, 133);\r\n  box-shadow: 11px 9px 15px 4px #000000;\r\n  position: relative;\r\n  z-index: 2;\n}\n.top-view a[data-v-214f7ea2]{\r\n  position: absolute;\r\n  top:0;\r\n  right: 0;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n*[data-v-214f7ea2] {\n  padding: 0px;\n  margin: 0px;\n  box-sizing: border-box;\n}\nbody[data-v-214f7ea2],\nmain[data-v-214f7ea2] {\n  width: 100%;\n  min-height: 100vh;\n}\nsection#view[data-v-214f7ea2] {\n  flex: 1;\n  background-color: rgb(184, 179, 179);\n}\n.top-view[data-v-214f7ea2]{\n  height: 80px;\n  width: 100%;\n  background: rgb(134, 133, 133);\n  box-shadow: 11px 9px 15px 4px #000000;\n  position: relative;\n  z-index: 2;\n}\n.top-view a[data-v-214f7ea2]{\n  position: absolute;\n  top:0;\n  right: 0;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -16584,7 +16608,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n*[data-v-301d1d53] {\r\n  padding: 0px;\r\n  margin: 0px;\r\n  box-sizing: border-box;\n}\nbody[data-v-301d1d53],\r\nmain[data-v-301d1d53] {\r\n  width: 100%;\r\n  min-height: 100vh;\n}\nsection#view[data-v-301d1d53] {\r\n  flex: 1;\r\n  background-color: rgb(184, 179, 179);\n}\n.top-view[data-v-301d1d53]{\r\n  height: 80px;\r\n  width: 100%;\r\n  background: rgb(134, 133, 133);\r\n  box-shadow: 11px 9px 15px 4px #000000;\r\n  position: relative;\r\n  z-index: 2;\n}\n.top-view .right-content[data-v-301d1d53]{\r\n  position: absolute;\r\n  top:0;\r\n  right: 0;\n}\n.products-table[data-v-301d1d53]{\r\n  width: 100%;\r\n  padding: 20px;\n}\n.products-table table[data-v-301d1d53]{\r\n  width: 100%;\r\n  border: 1px solid #000;\r\n  max-height: 600px;\r\n  overflow-y: auto;\n}\n.products-table tr[data-v-301d1d53],\r\n.products-table th[data-v-301d1d53],\r\n.products-table td[data-v-301d1d53]{\r\n  border: 1px solid #000;\r\n  max-height: 30px;\r\n  height: 100%;\r\n  text-align: center;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n*[data-v-301d1d53] {\n  padding: 0px;\n  margin: 0px;\n  box-sizing: border-box;\n}\nbody[data-v-301d1d53],\nmain[data-v-301d1d53] {\n  width: 100%;\n  min-height: 100vh;\n}\nsection#view[data-v-301d1d53] {\n  flex: 1;\n  background-color: rgb(184, 179, 179);\n}\n.top-view[data-v-301d1d53]{\n  height: 80px;\n  width: 100%;\n  background: rgb(134, 133, 133);\n  box-shadow: 11px 9px 15px 4px #000000;\n  position: relative;\n  z-index: 2;\n}\n.top-view .right-content[data-v-301d1d53]{\n  position: absolute;\n  top:0;\n  right: 0;\n}\n.products-table[data-v-301d1d53]{\n  width: 100%;\n  padding: 20px;\n}\n.products-table table[data-v-301d1d53]{\n  width: 100%;\n  border: 1px solid #000;\n  max-height: 600px;\n  overflow-y: auto;\n}\n.products-table tr[data-v-301d1d53],\n.products-table th[data-v-301d1d53],\n.products-table td[data-v-301d1d53]{\n  border: 1px solid #000;\n  max-height: 30px;\n  height: 100%;\n  text-align: center;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -16608,7 +16632,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n*[data-v-08aa03f3] {\r\n  padding: 0px;\r\n  margin: 0px;\r\n  box-sizing: border-box;\n}\nbody[data-v-08aa03f3],\r\nmain[data-v-08aa03f3] {\r\n  width: 100%;\r\n  min-height: 100vh;\n}\nsection#view[data-v-08aa03f3] {\r\n  flex: 1;\r\n  background-color: rgb(184, 179, 179);\n}\n.top-view[data-v-08aa03f3]{\r\n  height: 80px;\r\n  width: 100%;\r\n  background: rgb(134, 133, 133);\r\n  box-shadow: 11px 9px 15px 4px #000000;\r\n  position: relative;\r\n  z-index: 2;\n}\n.top-view a[data-v-08aa03f3]{\r\n  position: absolute;\r\n  top:0;\r\n  right: 0;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n*[data-v-08aa03f3] {\n  padding: 0px;\n  margin: 0px;\n  box-sizing: border-box;\n}\nbody[data-v-08aa03f3],\nmain[data-v-08aa03f3] {\n  width: 100%;\n  min-height: 100vh;\n}\nsection#view[data-v-08aa03f3] {\n  flex: 1;\n  background-color: rgb(184, 179, 179);\n}\n.top-view[data-v-08aa03f3]{\n  height: 80px;\n  width: 100%;\n  background: rgb(134, 133, 133);\n  box-shadow: 11px 9px 15px 4px #000000;\n  position: relative;\n  z-index: 2;\n}\n.top-view a[data-v-08aa03f3]{\n  position: absolute;\n  top:0;\n  right: 0;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -16632,7 +16656,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n*[data-v-cb7f7ca6] {\r\n  padding: 0px;\r\n  margin: 0px;\r\n  box-sizing: border-box;\n}\nbody[data-v-cb7f7ca6],\r\nmain[data-v-cb7f7ca6] {\r\n  width: 100%;\r\n  min-height: 100vh;\n}\nsection#view[data-v-cb7f7ca6] {\r\n  flex: 1;\r\n  background-color: rgb(184, 179, 179);\n}\n.top-view[data-v-cb7f7ca6]{\r\n  height: 80px;\r\n  width: 100%;\r\n  background: rgb(134, 133, 133);\r\n  box-shadow: 11px 9px 15px 4px #000000;\r\n  position: relative;\r\n  z-index: 2;\n}\n.top-view a[data-v-cb7f7ca6]{\r\n  position: absolute;\r\n  top:0;\r\n  right: 0;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n*[data-v-cb7f7ca6] {\n  padding: 0px;\n  margin: 0px;\n  box-sizing: border-box;\n}\nbody[data-v-cb7f7ca6],\nmain[data-v-cb7f7ca6] {\n  width: 100%;\n  min-height: 100vh;\n}\nsection#view[data-v-cb7f7ca6] {\n  flex: 1;\n  background-color: rgb(184, 179, 179);\n}\n.top-view[data-v-cb7f7ca6]{\n  height: 80px;\n  width: 100%;\n  background: rgb(134, 133, 133);\n  box-shadow: 11px 9px 15px 4px #000000;\n  position: relative;\n  z-index: 2;\n}\n.top-view a[data-v-cb7f7ca6]{\n  position: absolute;\n  top:0;\n  right: 0;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -16656,7 +16680,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n*[data-v-53c827aa] {\r\n  padding: 0px;\r\n  margin: 0px;\r\n  box-sizing: border-box;\n}\nbody[data-v-53c827aa],\r\nmain[data-v-53c827aa] {\r\n  width: 100%;\r\n  min-height: 100vh;\n}\nsection#view[data-v-53c827aa] {\r\n  flex: 1;\r\n  background-color: rgb(184, 179, 179);\n}\n.top-view[data-v-53c827aa]{\r\n  height: 80px;\r\n  width: 100%;\r\n  background: rgb(134, 133, 133);\r\n  box-shadow: 11px 9px 15px 4px #000000;\r\n  position: relative;\r\n  z-index: 2;\n}\n.top-view .right-content[data-v-53c827aa]{\r\n  position: absolute;\r\n  top:0;\r\n  right: 0;\n}\n.products-table[data-v-53c827aa]{\r\n  width: 100%;\r\n  padding: 20px;\n}\n.products-table table[data-v-53c827aa]{\r\n  width: 100%;\r\n  border: 1px solid #000;\r\n  max-height: 600px;\r\n  overflow-y: auto;\n}\n.products-table tr[data-v-53c827aa],\r\n.products-table th[data-v-53c827aa],\r\n.products-table td[data-v-53c827aa]{\r\n  border: 1px solid #000;\r\n  max-height: 30px;\r\n  height: 100%;\r\n  text-align: center;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n*[data-v-53c827aa] {\n  padding: 0px;\n  margin: 0px;\n  box-sizing: border-box;\n}\nbody[data-v-53c827aa],\nmain[data-v-53c827aa] {\n  width: 100%;\n  min-height: 100vh;\n}\nsection#view[data-v-53c827aa] {\n  flex: 1;\n  background-color: rgb(184, 179, 179);\n}\n.top-view[data-v-53c827aa]{\n  height: 80px;\n  width: 100%;\n  background: rgb(134, 133, 133);\n  box-shadow: 11px 9px 15px 4px #000000;\n  position: relative;\n  z-index: 2;\n}\n.top-view .right-content[data-v-53c827aa]{\n  position: absolute;\n  top:0;\n  right: 0;\n}\n.products-table[data-v-53c827aa]{\n  width: 100%;\n  padding: 20px;\n}\n.products-table table[data-v-53c827aa]{\n  width: 100%;\n  border: 1px solid #000;\n  max-height: 600px;\n  overflow-y: auto;\n}\n.products-table tr[data-v-53c827aa],\n.products-table th[data-v-53c827aa],\n.products-table td[data-v-53c827aa]{\n  border: 1px solid #000;\n  max-height: 30px;\n  height: 100%;\n  text-align: center;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -16680,7 +16704,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n*[data-v-96fcaeae] {\r\n  padding: 0px;\r\n  margin: 0px;\r\n  box-sizing: border-box;\n}\nbody[data-v-96fcaeae],\r\nmain[data-v-96fcaeae] {\r\n  width: 100%;\r\n  min-height: 100vh;\n}\nsection#view[data-v-96fcaeae] {\r\n  flex: 1;\r\n  background-color: rgb(184, 179, 179);\n}\n.top-view[data-v-96fcaeae]{\r\n  height: 80px;\r\n  width: 100%;\r\n  background: rgb(134, 133, 133);\r\n  box-shadow: 11px 9px 15px 4px #000000;\r\n  position: relative;\r\n  z-index: 2;\n}\n.top-view .right-content[data-v-96fcaeae]{\r\n  position: absolute;\r\n  top:0;\r\n  right: 0;\n}\n.users-table[data-v-96fcaeae]{\r\n  width: 100%;\r\n  padding: 20px;\n}\n.users-table table[data-v-96fcaeae]{\r\n  width: 100%;\r\n  border: 1px solid #000;\r\n  max-height: 600px;\r\n  overflow-y: auto;\n}\n.users-table tr[data-v-96fcaeae],\r\n.users-table th[data-v-96fcaeae],\r\n.users-table td[data-v-96fcaeae]{\r\n  border: 1px solid #000;\r\n  max-height: 30px;\r\n  height: 100%;\r\n  text-align: center;\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n*[data-v-96fcaeae] {\n  padding: 0px;\n  margin: 0px;\n  box-sizing: border-box;\n}\nbody[data-v-96fcaeae],\nmain[data-v-96fcaeae] {\n  width: 100%;\n  min-height: 100vh;\n}\nsection#view[data-v-96fcaeae] {\n  flex: 1;\n  background-color: rgb(184, 179, 179);\n}\n.top-view[data-v-96fcaeae]{\n  height: 80px;\n  width: 100%;\n  background: rgb(134, 133, 133);\n  box-shadow: 11px 9px 15px 4px #000000;\n  position: relative;\n  z-index: 2;\n}\n.top-view .right-content[data-v-96fcaeae]{\n  position: absolute;\n  top:0;\n  right: 0;\n}\n.users-table[data-v-96fcaeae]{\n  width: 100%;\n  padding: 20px;\n}\n.users-table table[data-v-96fcaeae]{\n  width: 100%;\n  border: 1px solid #000;\n  max-height: 600px;\n  overflow-y: auto;\n}\n.users-table tr[data-v-96fcaeae],\n.users-table th[data-v-96fcaeae],\n.users-table td[data-v-96fcaeae]{\n  border: 1px solid #000;\n  max-height: 30px;\n  height: 100%;\n  text-align: center;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -16704,7 +16728,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.about[data-v-1a8079fe] {\r\n  height: inherit;\n}\n.about p[data-v-1a8079fe]{\r\n  max-width: 600px;\r\n  text-align: center;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.about[data-v-1a8079fe] {\n  height: inherit;\n}\n.about p[data-v-1a8079fe]{\n  max-width: 600px;\n  text-align: center;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -16728,7 +16752,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n*{\r\n    margin: 0px;\r\n    padding: 0px;\r\n    box-sizing: border-box;\n}\na, a:visited{\r\n    color: white;\n}\na:hover{\r\n    color: #ccc;\n}\n#app{\r\n    height: 100vh;\r\n    width: 100%;\n}\nmain{\r\n  height: calc(100vh - 80px);\r\n  position: relative;\n}\r\n  \r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n*{\n    margin: 0px;\n    padding: 0px;\n    box-sizing: border-box;\n}\na, a:visited{\n    color: white;\n}\na:hover{\n    color: #ccc;\n}\n#app{\n    height: 100vh;\n    width: 100%;\n}\nmain{\n  height: calc(100vh - 80px);\n  position: relative;\n}\n  \n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -16800,7 +16824,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#login{\r\n    width: 100%;\r\n    height: inherit;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#login{\n    width: 100%;\n    height: inherit;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -16824,46 +16848,14 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-<<<<<<< HEAD
-___CSS_LOADER_EXPORT___.push([module.id, "\n#login[data-v-d1636242]{\r\n   width: 100%;\r\n   background: #797979;\r\n   height: 100vh;\n}\n#content[data-v-d1636242]{\r\n   height: inherit;\r\n   width: inherit;\n}\n#form-register[data-v-d1636242]{\r\n   max-width: 350px;\r\n   width: 100%;\r\n   height: 580px;\r\n   padding: 20px;\r\n   background: rgb(43, 43, 43);\r\n   color: white;\r\n   border-radius: 5px;\r\n   box-shadow: 5px 5px 15px 5px #000000;\n}\nh3[data-v-d1636242]{\r\n   color: white;\r\n   font-size: 32px;\r\n   text-align: center;\n}\nform[data-v-d1636242]{\r\n   gap: 5px;\n}\ninput[data-v-d1636242]{\r\n   height: 30px;\r\n   outline: none;\n}\ninput[type=\"submit\"][data-v-d1636242]{\r\n   margin-top: 20px;\r\n   padding: 5px;\r\n   display: flex;\r\n   align-items: center;\r\n   justify-content: center;\r\n   background: rgb(2,0,36);\r\n   background: linear-gradient(302deg, rgba(2,0,36,1) 1%, rgba(9,121,35,1) 28%); \r\n   border: none;\r\n   border-radius: 5px;\r\n   transition: .3s;\n}\ninput[type=\"submit\"][data-v-d1636242]:hover{\r\n   transform: scale(1.08);\r\n   color: white;\n}\nspan[data-v-d1636242]:hover{\r\n   cursor: pointer;\n}\r\n", ""]);
-=======
 ___CSS_LOADER_EXPORT___.push([module.id, "\n#login[data-v-19a91700]{\n   width: 100%;\n   background: #797979;\n   height: 100vh;\n}\n#content[data-v-19a91700]{\n   height: inherit;\n   width: inherit;\n}\n#form-register[data-v-19a91700]{\n   max-width: 350px;\n   width: 100%;\n   height: 580px;\n   padding: 20px;\n   background: rgb(43, 43, 43);\n   color: white;\n   border-radius: 5px;\n   box-shadow: 5px 5px 15px 5px #000000;\n}\nh3[data-v-19a91700]{\n   color: white;\n   font-size: 32px;\n   text-align: center;\n}\nform[data-v-19a91700]{\n   gap: 5px;\n}\ninput[data-v-19a91700]{\n   height: 30px;\n   outline: none;\n}\ninput[type=\"submit\"][data-v-19a91700]{\n   margin-top: 20px;\n   padding: 5px;\n   display: flex;\n   align-items: center;\n   justify-content: center;\n   background: rgb(2,0,36);\n   background: linear-gradient(302deg, rgba(2,0,36,1) 1%, rgba(9,121,35,1) 28%); \n   border: none;\n   border-radius: 5px;\n   transition: .3s;\n}\ninput[type=\"submit\"][data-v-19a91700]:hover{\n   transform: scale(1.08);\n   color: white;\n}\nspan[data-v-19a91700]:hover{\n   cursor: pointer;\n}\n", ""]);
->>>>>>> 3d0aad812147cce3e2a24dc2d59209e253725195
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
 
 /***/ }),
 
-<<<<<<< HEAD
-/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/view/RegisterProduct.vue?vue&type=style&index=0&id=3e246dc0&scoped=true&lang=css&":
-/*!************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/view/RegisterProduct.vue?vue&type=style&index=0&id=3e246dc0&scoped=true&lang=css& ***!
-  \************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
-/***/ ((module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
-/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
-// Imports
-
-var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
-// Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#login[data-v-3e246dc0]{\r\n   width: 100%;\r\n   background: #797979;\r\n   height: 100vh;\n}\n#content[data-v-3e246dc0]{\r\n   height: inherit;\r\n   width: inherit;\n}\n#form-register[data-v-3e246dc0]{\r\n   max-width: 350px;\r\n   width: 100%;\r\n   height: 580px;\r\n   padding: 20px;\r\n   background: rgb(43, 43, 43);\r\n   color: white;\r\n   border-radius: 5px;\r\n   box-shadow: 5px 5px 15px 5px #000000;\n}\nh3[data-v-3e246dc0]{\r\n   color: white;\r\n   font-size: 32px;\r\n   text-align: center;\n}\nform[data-v-3e246dc0]{\r\n   gap: 5px;\n}\ninput[data-v-3e246dc0]{\r\n   height: 30px;\r\n   outline: none;\n}\ninput[type=\"submit\"][data-v-3e246dc0]{\r\n   margin-top: 20px;\r\n   padding: 5px;\r\n   display: flex;\r\n   align-items: center;\r\n   justify-content: center;\r\n   background: rgb(2,0,36);\r\n   background: linear-gradient(302deg, rgba(2,0,36,1) 1%, rgba(9,121,35,1) 28%); \r\n   border: none;\r\n   border-radius: 5px;\r\n   transition: .3s;\n}\ninput[type=\"submit\"][data-v-3e246dc0]:hover{\r\n   transform: scale(1.08);\r\n   color: white;\n}\nspan[data-v-3e246dc0]:hover{\r\n   cursor: pointer;\n}\r\n", ""]);
-// Exports
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
-
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/view/UpdateUser.vue?vue&type=style&index=0&id=7c92c2f0&scoped=true&lang=css&":
-=======
 /***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/view/User/Login.vue?vue&type=style&index=0&id=0d9c5b7e&scoped=true&lang=css&":
->>>>>>> 3d0aad812147cce3e2a24dc2d59209e253725195
 /*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/view/User/Login.vue?vue&type=style&index=0&id=0d9c5b7e&scoped=true&lang=css& ***!
   \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
@@ -16880,9 +16872,6 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-<<<<<<< HEAD
-___CSS_LOADER_EXPORT___.push([module.id, "\n#login[data-v-7c92c2f0]{\r\n   width: 100%;\r\n   background: #797979;\r\n   height: 100vh;\n}\n#content[data-v-7c92c2f0]{\r\n   height: inherit;\r\n   width: inherit;\n}\n#form-register[data-v-7c92c2f0]{\r\n   max-width: 350px;\r\n   width: 100%;\r\n   height: 580px;\r\n   padding: 20px;\r\n   background: rgb(43, 43, 43);\r\n   color: white;\r\n   border-radius: 5px;\r\n   box-shadow: 5px 5px 15px 5px #000000;\n}\nh3[data-v-7c92c2f0]{\r\n   color: white;\r\n   font-size: 32px;\r\n   text-align: center;\n}\nform[data-v-7c92c2f0]{\r\n   gap: 5px;\n}\ninput[data-v-7c92c2f0]{\r\n   height: 30px;\r\n   outline: none;\n}\ninput[type=\"submit\"][data-v-7c92c2f0]{\r\n   margin-top: 20px;\r\n   padding: 5px;\r\n   display: flex;\r\n   align-items: center;\r\n   justify-content: center;\r\n   background: rgb(2,0,36);\r\n   background: linear-gradient(302deg, rgba(2,0,36,1) 1%, rgba(9,121,35,1) 28%); \r\n   border: none;\r\n   border-radius: 5px;\r\n   transition: .3s;\n}\ninput[type=\"submit\"][data-v-7c92c2f0]:hover{\r\n   transform: scale(1.08);\r\n   color: white;\n}\nspan[data-v-7c92c2f0]:hover{\r\n   cursor: pointer;\n}\r\n", ""]);
-=======
 ___CSS_LOADER_EXPORT___.push([module.id, "\n#login[data-v-0d9c5b7e]{\n  width: 100%;\n  background: #797979;\n  height: 100vh;\n}\n.warning[data-v-0d9c5b7e]{\n  color: red;\n  text-align: center;\n}\n#content[data-v-0d9c5b7e]{\n  height: inherit;\n  width: inherit;\n}\n#form-login[data-v-0d9c5b7e]{\n  height: 360px;\n  background: rgb(43, 43, 43);\n  max-width: 350px;\n  width: 100%;\n  padding: 20px;\n  color: white;\n  border-radius: 5px;\n  box-shadow: 5px 5px 15px 5px #000000;\n}\nh3[data-v-0d9c5b7e]{\n  color: white;\n  font-size: 32px;\n  text-align: center;\n}\nform[data-v-0d9c5b7e]{\n  gap: 5px;\n}\ninput[data-v-0d9c5b7e]{\n  height: 30px;\n  outline: none;\n}\ninput[type=\"submit\"][data-v-0d9c5b7e]{\n  margin-top: 20px;\n  padding: 5px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  background: rgb(2,0,36);\n  background: linear-gradient(302deg, rgba(2,0,36,1) 1%, rgba(9,121,35,1) 28%); \n  border: none;\n  border-radius: 5px;\n  transition: .3s;\n}\ninput[type=\"submit\"][data-v-0d9c5b7e]:hover{\n  transform: scale(1.08);\n  color: white;\n}\nspan[data-v-0d9c5b7e]:hover{\n  cursor: pointer;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
@@ -16932,7 +16921,6 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, "\n#login[data-v-57d11fe8]{\n   width: 100%;\n   background: #797979;\n   height: 100vh;\n}\n#content[data-v-57d11fe8]{\n   height: inherit;\n   width: inherit;\n}\n#form-register[data-v-57d11fe8]{\n   max-width: 350px;\n   width: 100%;\n   height: 580px;\n   padding: 20px;\n   background: rgb(43, 43, 43);\n   color: white;\n   border-radius: 5px;\n   box-shadow: 5px 5px 15px 5px #000000;\n}\nh3[data-v-57d11fe8]{\n   color: white;\n   font-size: 32px;\n   text-align: center;\n}\nform[data-v-57d11fe8]{\n   gap: 5px;\n}\ninput[data-v-57d11fe8]{\n   height: 30px;\n   outline: none;\n}\ninput[type=\"submit\"][data-v-57d11fe8]{\n   margin-top: 20px;\n   padding: 5px;\n   display: flex;\n   align-items: center;\n   justify-content: center;\n   background: rgb(2,0,36);\n   background: linear-gradient(302deg, rgba(2,0,36,1) 1%, rgba(9,121,35,1) 28%); \n   border: none;\n   border-radius: 5px;\n   transition: .3s;\n}\ninput[type=\"submit\"][data-v-57d11fe8]:hover{\n   transform: scale(1.08);\n   color: white;\n}\nspan[data-v-57d11fe8]:hover{\n   cursor: pointer;\n}\n", ""]);
->>>>>>> 3d0aad812147cce3e2a24dc2d59209e253725195
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -20580,7 +20568,7 @@ var render = function () {
                     _vm._v(" "),
                     _c("div", {}, [
                       _vm._v(
-                        _vm._s(product.model) + " | " + _vm._s(product.sex)
+                        _vm._s(product.model) + " | " + _vm._s(product.gender)
                       ),
                     ]),
                   ]
@@ -20788,6 +20776,13 @@ var render = function () {
               },
             }),
             _vm._v(" "),
+            _c("label", { attrs: { for: "photo" } }, [_vm._v("Foto")]),
+            _vm._v(" "),
+            _c("input", {
+              attrs: { type: "file", name: "photo", id: "photo" },
+              on: { change: _vm.newfile },
+            }),
+            _vm._v(" "),
             _c("label", { attrs: { for: "price" } }, [_vm._v("Valor:")]),
             _vm._v(" "),
             _c("input", {
@@ -20867,7 +20862,7 @@ var render = function () {
               attrs: { type: "submit", value: "Cadastrar" },
               on: {
                 click: function ($event) {
-                  return _vm.registerProduct()
+                  return _vm.submit()
                 },
               },
             }),

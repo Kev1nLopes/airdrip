@@ -11,7 +11,7 @@
             </div>
             <h3 class="mt-5 is-size-4">R$ {{product.price}}</h3>
             <div class="">Marca: {{product.provider}}</div>
-            <div class="">{{product.model}} | {{product.sex}}</div>
+            <div class="">{{product.model}} | {{product.gender}}</div>
           </div>
         </div>
       </section>
@@ -27,25 +27,25 @@ import Footer from './components/Footer.vue';
 export default {
     name:'About',
     components:{
-        Header,
-        Footer
+      Header,
+      Footer
     },
     data(){
-        return{
-            products: null
-        }
+      return{
+        products: null
+      }
     },
     methods:{
-        getProducts(){
-            axios.get('/api/products')
-            .then(response=>{
-                this.products = response.data.list;
-            })
-        },
-        
+      getProducts(){
+        axios.get('/api/products')
+        .then(response=>{
+              this.products = response.data.list;
+              console.log(this.products);
+        })
+      },  
     },
     created(){
-        this.getProducts();
+      this.getProducts();
     }
     
 }

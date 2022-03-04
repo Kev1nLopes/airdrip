@@ -46,7 +46,7 @@ export default{
         {
             path: '/register',
             component: Register,
-            name: 'Register'
+            name: 'Register',
         },
         {
             path: '/update_user/:id',
@@ -56,9 +56,10 @@ export default{
             beforeEnter: Middleware.auth
         },
         {
-            path: '/registrar_produto',
+            path: '/register_product',
             component: RegisterProduct,
-            name: 'RegisterProduct'
+            name: 'RegisterProduct',
+            beforeEnter: Middleware.auth
         },
         {
             path: '/send_feedback',
