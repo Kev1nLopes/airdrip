@@ -82,7 +82,7 @@ export default {
               'Content-Type': 'multipart/form-data'
             }})
             .then(response=>{
-              console.log(response)
+              this.$router.push({path: '/'});
             })
 
         }

@@ -15895,6 +15895,8 @@ __webpack_require__.r(__webpack_exports__);
       this.product.file = e.target.files[0];
     },
     submit: function submit() {
+      var _this = this;
+
       var form = new FormData();
       form.append('name_product', this.product.name_product);
       form.append('provider', this.product.provider);
@@ -15908,7 +15910,9 @@ __webpack_require__.r(__webpack_exports__);
           'Content-Type': 'multipart/form-data'
         }
       }).then(function (response) {
-        console.log(response);
+        _this.$router.push({
+          path: '/'
+        });
       });
     }
   }
@@ -20556,7 +20560,11 @@ var render = function () {
                       [_vm._v(_vm._s(product.name_product))]
                     ),
                     _vm._v(" "),
-                    _vm._m(0, true),
+                    _c("div", { staticClass: "fake-img mt-2" }, [
+                      _c("img", {
+                        attrs: { src: product.path, alt: "Tenis imagem" },
+                      }),
+                    ]),
                     _vm._v(" "),
                     _c("h3", { staticClass: "mt-5 is-size-4" }, [
                       _vm._v("R$ " + _vm._s(product.price)),
@@ -20585,16 +20593,7 @@ var render = function () {
     1
   )
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "fake-img mt-2" }, [
-      _c("img", { attrs: { src: "", alt: "Tenis imagem" } }),
-    ])
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

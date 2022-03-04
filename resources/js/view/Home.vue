@@ -7,7 +7,7 @@
           <div v-for="(product, index) in products" :key="index" class="card is-flex is-flex-direction-column is-align-items-center">
             <h1 class="mt-3 is-size-3 has-text-weight-medium">{{product.name_product}}</h1>
             <div class="fake-img mt-2">
-              <img src="" alt="Tenis imagem">
+              <img :src="product.path" alt="Tenis imagem">
             </div>
             <h3 class="mt-5 is-size-4">R$ {{product.price}}</h3>
             <div class="">Marca: {{product.provider}}</div>
